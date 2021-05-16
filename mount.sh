@@ -1,4 +1,4 @@
-#!/bash/sh
+#!/usr/bin/env bash
 
 # parted脚本自动挂载分区磁盘
 #  1.parted 核心命令
@@ -32,11 +32,11 @@ cdazparted=$(echo ${#azparted})
 if [ $cdazparted -lt 1 ]
 # 判断变量字符串长度小于1
 then                                            # 然后
-        sudo apt-get install  parted
-        echo "您还没有安装parted，正在为您安装，请稍后："
+	echo "您还没有安装parted，正在为您安装，请稍后："
+    sudo apt-get install  parted
 else                                            # 其他情况
-        echo "parted 已经安装，无需操作,已经安装的信息为：
-        $azparted"
+    echo "parted 已经安装，无需操作,已经安装的信息为：
+    $azparted"
 fi                                              # if的结束标记 fi
 #----------------------------------- 检测安装工具向上包结束  -------------------------------
 echo "未分区的磁盘有: "
@@ -62,9 +62,9 @@ gsh=$(parted -s $a print | grep primary || logical )
 # parted -s /dev/sda print | awk -F " " '$5=="primary" {print c++ $6} '
 if [ ${#gsh}  -eq 0 ]                                   # ${#gsh} 变量长度， -eq 小等于 0
 then
-        echo "磁盘 $a 为空盘，没有找到主分区和逻辑分区，可以进行进行格式化并分区操作，请等待。。。  "
+    echo "磁盘 $a 为空盘，没有找到主分区和逻辑分区，可以进行进行格式化并分区操作，请等待。。。  "
 else 
-        echo "  #　parted -s /dev/xxx   rm 1 磁盘名称： $a 磁盘存在数据，是否继续格式化操作"
+   echo "  #　parted -s /dev/xxx   rm 1 磁盘名称： $a 磁盘存在数据，是否继续格式化操作"
 fi
 echo "请确认脚本的继续执行ｙ继续　|　任意字符退出"
 read gshy
@@ -80,7 +80,7 @@ parted -s $a mklabel gpt                      # 格式化为gpt 动态分区
 parted -s $a mkpart primary 0 100%      # 分区 全部
 #parted -s $a mkpart entended 3G 5G     # 第一个扩展分区:从3G 到5G
 #parted -s $a mkpart logic 5G 100%      # 第二个扩展分区:从5G到100%
-                                                                        # logic [ˈlɒdʒɪk] 逻辑，分区
+# logic [ˈlɒdʒɪk] 逻辑，分区
 #-------------------------------------挂载------------------------------------
 b=$(echo $a"1")
 mkfs -t ext4 $b                                 # 格式化分区
