@@ -154,6 +154,10 @@ function setup() {
 
 	echo "设置定时任务"
 
+  chmod +x /root/mnt/bee/send.sh
+
+  chmod +x /root/mnt/bee/cashout.sh
+
 	#write out current crontab
 	crontab -l > mycron
 	#echo new cron into cron file
