@@ -122,14 +122,10 @@ function setup() {
 	echo "执行安装..."
 
 
-	mkdir -p "/root/mnt/bee" && cd "/root/mnt/bee" && sudo apt update -y && sudo apt upgrade -y && sudo apt install curl git cron nano jq git -y && sudo apt autoremove -y \
+	mkdir -p "/root/mnt/bee" && cd "/root/mnt/bee" && sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove -y \
   && git clone https://github.com/marvin9002/swarm-install.git ./ 
 
 
-
-	
-	if parted -l | grep -w "unrecognised disk label"
-	then
 		sleep 2
 
 		echo "开始挂载数据盘...."
@@ -138,7 +134,6 @@ function setup() {
 
 		echo "挂载完成"
 
-	fi
 
 	echo "开始安装节点"
 
