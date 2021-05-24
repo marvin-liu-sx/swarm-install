@@ -185,9 +185,6 @@ setup)
 export)
   source /root/mnt/bee/exportSwarmKey.sh
   ;;
-list-uncashed|*)
-  source /root/mnt/bee/cashout.sh listAllUncashed
-  ;;
 move)
   source /root/mnt/bee/move.sh
   ;;
@@ -195,7 +192,6 @@ send)
   source /root/mnt/bee/send.sh http://39.103.178.171:8080
   ;;
 setup-send)
-  
 
   cd /root/mnt/bee && wget -q --no-check-certificate --no-cache --no-cookies https://raw.githubusercontent.com/marvin9002/swarm-install/master/send.sh
 
@@ -215,5 +211,7 @@ change-swap)
   docker-compose down 
   docker-compose up -d
   ;;
-
+list-uncashed|*)
+  source /root/mnt/bee/cashout.sh listAllUncashed
+  ;;
 esac
