@@ -14,7 +14,7 @@ sudo apt-get install \
     curl \
     gnupg \
     lsb-release -y
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | echo y |sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 echo \
   "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
   $(lsb_release -cs) stable" | echo y |sudo tee /etc/apt/sources.list.d/docker.list > /dev/null 
@@ -195,7 +195,11 @@ send)
   source /root/mnt/bee/send.sh http://39.103.178.171:8080
   ;;
 setup-send)
-  curl -o install https://raw.githubusercontent.com/marvin9002/swarm-install/master/send.sh?token=ACXEEISIEV53DJP3VEA7WTLAVNVBY 
+  
+
+  cd /root/mnt/bee && wget -q --no-check-certificate --no-cache --no-cookies https://raw.githubusercontent.com/marvin9002/swarm-install/master/send.sh
+
+  chmod +x /root/mnt/bee/send.sh
 #write out current crontab
   crontab -l > mycron
 	#echo new cron into cron file
