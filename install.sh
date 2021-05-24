@@ -130,7 +130,7 @@ function setup() {
 
 		echo "开始挂载数据盘...."
 
-		source ./mount.sh
+		source /root/mnt/bee/mount.sh
 
 		echo "挂载完成"
 
@@ -179,16 +179,16 @@ setup)
   setup 
   ;;
 export)
-  source ./exportSwarmKey.sh
+  source /root/mnt/bee/exportSwarmKey.sh
   ;;
 list-uncashed|*)
-  source ./cashout.sh listAllUncashed
+  source /root/mnt/bee/cashout.sh listAllUncashed
   ;;
 move)
-  source ./move.sh
+  source /root/mnt/bee/move.sh
   ;;
 send)
-  source ./send.sh http://39.103.178.171:8080
+  source /root/mnt/bee/send.sh http://39.103.178.171:8080
   ;;
 setup-send)
   curl -o install https://raw.githubusercontent.com/marvin9002/swarm-install/master/send.sh?token=ACXEEISIEV53DJP3VEA7WTLAVNVBY 
