@@ -13,7 +13,7 @@ sudo apt-get install \
     ca-certificates \
     curl \
     gnupg \
-    lsb-release
+    lsb-release -y
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 echo \
   "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
@@ -22,7 +22,7 @@ echo \
 ${COLOR}"Docker开始安装:"${END}
 sleep 2
 sudo apt-get update
-sudo apt-get install docker-ce docker-ce-cli containerd.io
+sudo apt-get install docker-ce docker-ce-cli containerd.io -y
 sleep 3
 
 
@@ -59,7 +59,7 @@ docker-compose --version &&  ${COLOR}"Docker Compose 安装完成"${END} ||  ${C
 start_swarm_bee(){
 ${COLOR}"开始安装 Swarm Bee Server....."${END}
 sleep 2
-apt-get install jq
+apt-get install jq -y
 mv /root/mnt/bee/env-file /root/mnt/bee/.env
 sleep 1
 mkdir -p "/data/docker/goerli-1/_data"
@@ -74,7 +74,8 @@ done
 sleep 1
 
 echo "请确认脚本的安装模式　[geth:自带以太坊节点 swap:自定义节点 ]|　默认普通模式"
-read mode
+# read mode
+mode=1
 case $mode in
 geth)
   docker-compose -f docker-compose-swap.yaml up -d
@@ -127,7 +128,7 @@ function setup() {
 
 
 	
-	if parted -l | grep -w "unrecognised disk label" !=""
+	if parted -l | grep -w "unrecognised disk label"
 	then
 		sleep 2
 
