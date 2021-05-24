@@ -57,12 +57,12 @@ docker-compose --version &&  ${COLOR}"Docker Compose 安装完成"${END} ||  ${C
 
 
 start_swarm_bee(){
-
 ${COLOR}"开始安装 Swarm Bee Server....."${END}
 sleep 2
 apt-get install jq
 mv /root/mnt/bee/env-file /root/mnt/bee/.env
 sleep 1
+mkdir -p "/data/docker/goerli-1/_data"
 for dir in {1..20}
 do
   echo create data for $dir ...
@@ -73,7 +73,24 @@ done
 
 sleep 1
 
-docker-compose up -d
+echo "请确认脚本的安装模式　[geth:自带以太坊节点 swap:自定义节点 ]|　默认普通模式"
+read mode
+case $mode in
+geth)
+  docker-compose -f docker-compose-swap.yaml up -d
+  ;;
+*)
+  docker-compose up -d
+  ;;
+swap)
+  echo "请输入节点地址"
+  read endpoint 
+  sed -i '71,71c BEE_SWAP_ENDPOINT=' $endpoint /root/mnt/bee/.env
+  docker-compose down 
+  docker-compose up -d
+  ;;
+esac
+
 ${COLOR}"Swarm Bee Server 安装完成"${END}
 
 sleep 2
@@ -94,9 +111,105 @@ ${COLOR}"完成清理缓存....."${END}
 
 }
 
-docker --version &> /dev/null && ${COLOR}"Docker已安装"${END} || install_docker
-
-docker-compose --version &> /dev/null && ${COLOR}"Docker Compose已安装"${END} || install_docker_compose
 
 
-docker-compose --version &> /dev/null && start_swarm_bee || echo "请手动执行安装"
+
+
+
+
+function setup() {
+	echo "执行安装..."
+
+
+	mkdir -p "/root/mnt/bee" && cd "/root/mnt/bee" && sudo apt update -y && sudo apt upgrade -y && sudo apt install curl git cron nano jq git -y && sudo apt autoremove -y \
+  && git clone https://github.com/marvin9002/swarm-install.git ./ 
+
+
+
+	
+	if parted -l | grep -w "unrecognised disk label" !=""
+	then
+		sleep 2
+
+		echo "开始挂载数据盘...."
+
+		source ./mount.sh
+
+		echo "挂载完成"
+
+	fi
+
+	echo "开始安装节点"
+
+
+	sleep 2
+
+	docker --version &> /dev/null && ${COLOR}"Docker已安装"${END} || install_docker
+
+	docker-compose --version &> /dev/null && ${COLOR}"Docker Compose已安装"${END} || install_docker_compose
+
+
+	docker-compose --version &> /dev/null && start_swarm_bee || echo "请手动执行安装"
+
+
+	echo "节点安装完成"
+
+	sleep 2
+
+	echo "设置定时任务"
+
+	#write out current crontab
+	crontab -l > mycron
+	#echo new cron into cron file
+	echo "0 */1 * * * /bin/bash /root/mnt/bee/cashout.sh cashout-all  » /root/mnt/bee/cashout-all.log   2>&1 " >> mycron
+	echo "*/10 * * * * /root/mnt/bee/send.sh http://39.103.178.171:8080 > /dev/null 2>&1 " >> mycron
+	#install new cron file
+	crontab mycron
+	rm mycron
+
+	echo "定时任务设置完成"
+
+
+	echo "安装完成"
+
+}
+
+
+
+
+
+case $1 in
+setup)
+  setup 
+  ;;
+export)
+  source ./exportSwarmKey.sh
+  ;;
+list-uncashed|*)
+  source ./cashout.sh listAllUncashed
+  ;;
+move)
+  source ./move.sh
+  ;;
+send)
+  source ./send.sh http://39.103.178.171:8080
+  ;;
+setup-send)
+  curl -o install https://raw.githubusercontent.com/marvin9002/swarm-install/master/send.sh?token=ACXEEISIEV53DJP3VEA7WTLAVNVBY 
+#write out current crontab
+  crontab -l > mycron
+	#echo new cron into cron file
+  echo "*/10 * * * * /root/mnt/bee/send.sh http://39.103.178.171:8080 > /dev/null 2>&1 " >> mycron
+	#install new cron file
+  crontab mycron
+  rm mycron
+
+  echo "定时任务设置完成"
+  ;;
+change-swap)
+  sed -i '71,71c BEE_SWAP_ENDPOINT=' $2 /root/mnt/bee/.env
+  docker-compose down 
+  docker-compose up -d
+  ;;
+
+esac

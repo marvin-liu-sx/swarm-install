@@ -1,6 +1,25 @@
 version: "3"
 
 services:
+  geth-goerli:
+    image: ethereum/client-go:v1.10.2
+    ports:
+      - 8545:8545
+      - 8546:8546
+      - 35555:30303
+    volumes:
+      - goerli-1:/root/.ethereum
+    restart: always
+    command:
+      - '--goerli'
+      - '--http'
+      - '--http.corsdomain=*'
+      - '--http.vhosts=*'
+      - '--http.addr=0.0.0.0'
+      - '--cache=2048'
+      - '--ws'
+      - '--ws.addr=0.0.0.0'
+      - '--light.nosyncserve'
   clef:
     image: ethersphere/clef:0.4.9
     restart: unless-stopped
@@ -44,7 +63,7 @@ services:
       - BEE_RESOLVER_OPTIONS
       - BEE_STANDALONE
       - BEE_SWAP_ENABLE
-      - BEE_SWAP_ENDPOINT=http://47.243.21.250:8545
+      - BEE_SWAP_ENDPOINT=http://geth-goerli:8545
       - BEE_SWAP_FACTORY_ADDRESS
       - BEE_SWAP_INITIAL_DEPOSIT
       - BEE_TRACING_ENABLE
@@ -61,6 +80,7 @@ services:
     command: start
     depends_on:
       - clef
+      - geth-goerli
 
 
   clef2:
@@ -82,7 +102,7 @@ services:
       - BEE_CLEF_SIGNER_ENABLE=true
       - BEE_CLEF_SIGNER_ENDPOINT=http://clef2:8550
       - BEE_CONFIG
-      - BEE_CORS_ALLOWED_ORIGINS
+      - BEE_CORS_ALLOWED_ORIGINS='*'
       - BEE_DATA_DIR
       - BEE_DB_CAPACITY
       - BEE_DB_OPEN_FILES_LIMIT
@@ -106,7 +126,7 @@ services:
       - BEE_RESOLVER_OPTIONS
       - BEE_STANDALONE
       - BEE_SWAP_ENABLE
-      - BEE_SWAP_ENDPOINT=http://47.243.21.250:8545
+      - BEE_SWAP_ENDPOINT=http://geth-goerli:8545
       - BEE_SWAP_FACTORY_ADDRESS
       - BEE_SWAP_INITIAL_DEPOSIT
       - BEE_TRACING_ENABLE
@@ -123,6 +143,7 @@ services:
     command: start
     depends_on:
       - clef2
+      - geth-goerli
       
   clef3:
     image: ethersphere/clef:0.4.9
@@ -167,7 +188,7 @@ services:
       - BEE_RESOLVER_OPTIONS
       - BEE_STANDALONE
       - BEE_SWAP_ENABLE
-      - BEE_SWAP_ENDPOINT=http://47.243.21.250:8545
+      - BEE_SWAP_ENDPOINT=http://geth-goerli:8545
       - BEE_SWAP_FACTORY_ADDRESS
       - BEE_SWAP_INITIAL_DEPOSIT
       - BEE_TRACING_ENABLE
@@ -184,6 +205,7 @@ services:
     command: start
     depends_on:
       - clef3
+      - geth-goerli
 
   clef4:
     image: ethersphere/clef:0.4.9
@@ -228,7 +250,7 @@ services:
       - BEE_RESOLVER_OPTIONS
       - BEE_STANDALONE
       - BEE_SWAP_ENABLE
-      - BEE_SWAP_ENDPOINT=http://47.243.21.250:8545
+      - BEE_SWAP_ENDPOINT=http://geth-goerli:8545
       - BEE_SWAP_FACTORY_ADDRESS
       - BEE_SWAP_INITIAL_DEPOSIT
       - BEE_TRACING_ENABLE
@@ -245,6 +267,7 @@ services:
     command: start
     depends_on:
       - clef4
+      - geth-goerli
       
 
   clef5:
@@ -290,7 +313,7 @@ services:
       - BEE_RESOLVER_OPTIONS
       - BEE_STANDALONE
       - BEE_SWAP_ENABLE
-      - BEE_SWAP_ENDPOINT=http://47.243.21.250:8545
+      - BEE_SWAP_ENDPOINT=http://geth-goerli:8545
       - BEE_SWAP_FACTORY_ADDRESS
       - BEE_SWAP_INITIAL_DEPOSIT
       - BEE_TRACING_ENABLE
@@ -307,6 +330,7 @@ services:
     command: start
     depends_on:
       - clef5
+      - geth-goerli
       
 
   clef6:
@@ -352,7 +376,7 @@ services:
       - BEE_RESOLVER_OPTIONS
       - BEE_STANDALONE
       - BEE_SWAP_ENABLE
-      - BEE_SWAP_ENDPOINT=http://47.243.21.250:8545
+      - BEE_SWAP_ENDPOINT=http://geth-goerli:8545
       - BEE_SWAP_FACTORY_ADDRESS
       - BEE_SWAP_INITIAL_DEPOSIT
       - BEE_TRACING_ENABLE
@@ -368,7 +392,8 @@ services:
       - bee-6:/home/bee/.bee
     command: start
     depends_on:
-      - clef6    
+      - clef6
+      - geth-goerli    
 
   clef7:
     image: ethersphere/clef:0.4.9
@@ -413,7 +438,7 @@ services:
       - BEE_RESOLVER_OPTIONS
       - BEE_STANDALONE
       - BEE_SWAP_ENABLE
-      - BEE_SWAP_ENDPOINT=http://47.243.21.250:8545
+      - BEE_SWAP_ENDPOINT=http://geth-goerli:8545
       - BEE_SWAP_FACTORY_ADDRESS
       - BEE_SWAP_INITIAL_DEPOSIT
       - BEE_TRACING_ENABLE
@@ -430,6 +455,7 @@ services:
     command: start
     depends_on:
       - clef7
+      - geth-goerli
 
   clef8:
     image: ethersphere/clef:0.4.9
@@ -474,7 +500,7 @@ services:
       - BEE_RESOLVER_OPTIONS
       - BEE_STANDALONE
       - BEE_SWAP_ENABLE
-      - BEE_SWAP_ENDPOINT=http://47.243.21.250:8545
+      - BEE_SWAP_ENDPOINT=http://geth-goerli:8545
       - BEE_SWAP_FACTORY_ADDRESS
       - BEE_SWAP_INITIAL_DEPOSIT
       - BEE_TRACING_ENABLE
@@ -491,6 +517,7 @@ services:
     command: start
     depends_on:
       - clef8
+      - geth-goerli
 
   clef9:
     image: ethersphere/clef:0.4.9
@@ -535,7 +562,7 @@ services:
       - BEE_RESOLVER_OPTIONS
       - BEE_STANDALONE
       - BEE_SWAP_ENABLE
-      - BEE_SWAP_ENDPOINT=http://47.243.21.250:8545
+      - BEE_SWAP_ENDPOINT=http://geth-goerli:8545
       - BEE_SWAP_FACTORY_ADDRESS
       - BEE_SWAP_INITIAL_DEPOSIT
       - BEE_TRACING_ENABLE
@@ -552,6 +579,7 @@ services:
     command: start
     depends_on:
       - clef9
+      - geth-goerli
 
   clef10:
     image: ethersphere/clef:0.4.9
@@ -596,7 +624,7 @@ services:
       - BEE_RESOLVER_OPTIONS
       - BEE_STANDALONE
       - BEE_SWAP_ENABLE
-      - BEE_SWAP_ENDPOINT=http://47.243.21.250:8545
+      - BEE_SWAP_ENDPOINT=http://geth-goerli:8545
       - BEE_SWAP_FACTORY_ADDRESS
       - BEE_SWAP_INITIAL_DEPOSIT
       - BEE_TRACING_ENABLE
@@ -613,6 +641,7 @@ services:
     command: start
     depends_on:
       - clef10
+      - geth-goerli
 
 
   clef11:
@@ -658,7 +687,7 @@ services:
       - BEE_RESOLVER_OPTIONS
       - BEE_STANDALONE
       - BEE_SWAP_ENABLE
-      - BEE_SWAP_ENDPOINT=http://47.243.21.250:8545
+      - BEE_SWAP_ENDPOINT=http://geth-goerli:8545
       - BEE_SWAP_FACTORY_ADDRESS
       - BEE_SWAP_INITIAL_DEPOSIT
       - BEE_TRACING_ENABLE
@@ -675,6 +704,7 @@ services:
     command: start
     depends_on:
       - clef11
+      - geth-goerli
 
   clef12:
     image: ethersphere/clef:0.4.9
@@ -719,7 +749,7 @@ services:
       - BEE_RESOLVER_OPTIONS
       - BEE_STANDALONE
       - BEE_SWAP_ENABLE
-      - BEE_SWAP_ENDPOINT=http://47.243.21.250:8545
+      - BEE_SWAP_ENDPOINT=http://geth-goerli:8545
       - BEE_SWAP_FACTORY_ADDRESS
       - BEE_SWAP_INITIAL_DEPOSIT
       - BEE_TRACING_ENABLE
@@ -736,6 +766,7 @@ services:
     command: start
     depends_on:
       - clef12
+      - geth-goerli
 
   clef13:
     image: ethersphere/clef:0.4.9
@@ -780,7 +811,7 @@ services:
       - BEE_RESOLVER_OPTIONS
       - BEE_STANDALONE
       - BEE_SWAP_ENABLE
-      - BEE_SWAP_ENDPOINT=http://47.243.21.250:8545
+      - BEE_SWAP_ENDPOINT=http://geth-goerli:8545
       - BEE_SWAP_FACTORY_ADDRESS
       - BEE_SWAP_INITIAL_DEPOSIT
       - BEE_TRACING_ENABLE
@@ -797,6 +828,7 @@ services:
     command: start
     depends_on:
       - clef13
+      - geth-goerli
 
   clef14:
     image: ethersphere/clef:0.4.9
@@ -841,7 +873,7 @@ services:
       - BEE_RESOLVER_OPTIONS
       - BEE_STANDALONE
       - BEE_SWAP_ENABLE
-      - BEE_SWAP_ENDPOINT=http://47.243.21.250:8545
+      - BEE_SWAP_ENDPOINT=http://geth-goerli:8545
       - BEE_SWAP_FACTORY_ADDRESS
       - BEE_SWAP_INITIAL_DEPOSIT
       - BEE_TRACING_ENABLE
@@ -858,6 +890,7 @@ services:
     command: start
     depends_on:
       - clef14
+      - geth-goerli
 
   clef15:
     image: ethersphere/clef:0.4.9
@@ -902,7 +935,7 @@ services:
       - BEE_RESOLVER_OPTIONS
       - BEE_STANDALONE
       - BEE_SWAP_ENABLE
-      - BEE_SWAP_ENDPOINT=http://47.243.21.250:8545
+      - BEE_SWAP_ENDPOINT=http://geth-goerli:8545
       - BEE_SWAP_FACTORY_ADDRESS
       - BEE_SWAP_INITIAL_DEPOSIT
       - BEE_TRACING_ENABLE
@@ -919,6 +952,7 @@ services:
     command: start
     depends_on:
       - clef15
+      - geth-goerli
 
   clef16:
     image: ethersphere/clef:0.4.9
@@ -963,7 +997,7 @@ services:
       - BEE_RESOLVER_OPTIONS
       - BEE_STANDALONE
       - BEE_SWAP_ENABLE
-      - BEE_SWAP_ENDPOINT=http://47.243.21.250:8545
+      - BEE_SWAP_ENDPOINT=http://geth-goerli:8545
       - BEE_SWAP_FACTORY_ADDRESS
       - BEE_SWAP_INITIAL_DEPOSIT
       - BEE_TRACING_ENABLE
@@ -980,6 +1014,7 @@ services:
     command: start
     depends_on:
       - clef16
+      - geth-goerli
 
   clef17:
     image: ethersphere/clef:0.4.9
@@ -1024,7 +1059,7 @@ services:
       - BEE_RESOLVER_OPTIONS
       - BEE_STANDALONE
       - BEE_SWAP_ENABLE
-      - BEE_SWAP_ENDPOINT=http://47.243.21.250:8545
+      - BEE_SWAP_ENDPOINT=http://geth-goerli:8545
       - BEE_SWAP_FACTORY_ADDRESS
       - BEE_SWAP_INITIAL_DEPOSIT
       - BEE_TRACING_ENABLE
@@ -1041,6 +1076,7 @@ services:
     command: start
     depends_on:
       - clef17
+      - geth-goerli
 
   clef18:
     image: ethersphere/clef:0.4.9
@@ -1085,7 +1121,7 @@ services:
       - BEE_RESOLVER_OPTIONS
       - BEE_STANDALONE
       - BEE_SWAP_ENABLE
-      - BEE_SWAP_ENDPOINT=http://47.243.21.250:8545
+      - BEE_SWAP_ENDPOINT=http://geth-goerli:8545
       - BEE_SWAP_FACTORY_ADDRESS
       - BEE_SWAP_INITIAL_DEPOSIT
       - BEE_TRACING_ENABLE
@@ -1102,6 +1138,7 @@ services:
     command: start
     depends_on:
       - clef18
+      - geth-goerli
 
   clef19:
     image: ethersphere/clef:0.4.9
@@ -1146,7 +1183,7 @@ services:
       - BEE_RESOLVER_OPTIONS
       - BEE_STANDALONE
       - BEE_SWAP_ENABLE
-      - BEE_SWAP_ENDPOINT=http://47.243.21.250:8545
+      - BEE_SWAP_ENDPOINT=http://geth-goerli:8545
       - BEE_SWAP_FACTORY_ADDRESS
       - BEE_SWAP_INITIAL_DEPOSIT
       - BEE_TRACING_ENABLE
@@ -1163,6 +1200,7 @@ services:
     command: start
     depends_on:
       - clef19
+      - geth-goerli
 
   clef20:
     image: ethersphere/clef:0.4.9
@@ -1207,7 +1245,7 @@ services:
       - BEE_RESOLVER_OPTIONS
       - BEE_STANDALONE
       - BEE_SWAP_ENABLE
-      - BEE_SWAP_ENDPOINT=http://47.243.21.250:8545
+      - BEE_SWAP_ENDPOINT=http://geth-goerli:8545
       - BEE_SWAP_FACTORY_ADDRESS
       - BEE_SWAP_INITIAL_DEPOSIT
       - BEE_TRACING_ENABLE
@@ -1224,6 +1262,7 @@ services:
     command: start
     depends_on:
       - clef20
+      - geth-goerli
 
   # clef21:
   #   image: ethersphere/clef:0.4.9
@@ -1268,7 +1307,7 @@ services:
   #     - BEE_RESOLVER_OPTIONS
   #     - BEE_STANDALONE
   #     - BEE_SWAP_ENABLE
-  #     - BEE_SWAP_ENDPOINT=http://47.243.21.250:8545
+  #     - BEE_SWAP_ENDPOINT=http://geth-goerli:8545
   #     - BEE_SWAP_FACTORY_ADDRESS
   #     - BEE_SWAP_INITIAL_DEPOSIT
   #     - BEE_TRACING_ENABLE
@@ -1329,7 +1368,7 @@ services:
   #     - BEE_RESOLVER_OPTIONS
   #     - BEE_STANDALONE
   #     - BEE_SWAP_ENABLE
-  #     - BEE_SWAP_ENDPOINT=http://47.243.21.250:8545
+  #     - BEE_SWAP_ENDPOINT=http://geth-goerli:8545
   #     - BEE_SWAP_FACTORY_ADDRESS
   #     - BEE_SWAP_INITIAL_DEPOSIT
   #     - BEE_TRACING_ENABLE
@@ -1390,7 +1429,7 @@ services:
   #     - BEE_RESOLVER_OPTIONS
   #     - BEE_STANDALONE
   #     - BEE_SWAP_ENABLE
-  #     - BEE_SWAP_ENDPOINT=http://47.243.21.250:8545
+  #     - BEE_SWAP_ENDPOINT=http://geth-goerli:8545
   #     - BEE_SWAP_FACTORY_ADDRESS
   #     - BEE_SWAP_INITIAL_DEPOSIT
   #     - BEE_TRACING_ENABLE
@@ -1451,7 +1490,7 @@ services:
   #     - BEE_RESOLVER_OPTIONS
   #     - BEE_STANDALONE
   #     - BEE_SWAP_ENABLE
-  #     - BEE_SWAP_ENDPOINT=http://47.243.21.250:8545
+  #     - BEE_SWAP_ENDPOINT=http://geth-goerli:8545
   #     - BEE_SWAP_FACTORY_ADDRESS
   #     - BEE_SWAP_INITIAL_DEPOSIT
   #     - BEE_TRACING_ENABLE
@@ -1512,7 +1551,7 @@ services:
   #     - BEE_RESOLVER_OPTIONS
   #     - BEE_STANDALONE
   #     - BEE_SWAP_ENABLE
-  #     - BEE_SWAP_ENDPOINT=http://47.243.21.250:8545
+  #     - BEE_SWAP_ENDPOINT=http://geth-goerli:8545
   #     - BEE_SWAP_FACTORY_ADDRESS
   #     - BEE_SWAP_INITIAL_DEPOSIT
   #     - BEE_TRACING_ENABLE
@@ -1532,6 +1571,12 @@ services:
       
 
 volumes:
+  goerli-1:
+    driver: local
+    driver_opts:
+      type: "none"
+      o: "bind"
+      device: "/data/docker/goerli-1/_data"
   clef-1:
   bee-1:
     driver: local

@@ -46,7 +46,7 @@ read -p "请输入要分区的磁盘："  a               ;
 echo "磁盘挂载目录格式为：   /www     将会清空该目录下的文件，重复执行脚本，仅仅更改挂载目录，不会更改硬盘数据"
 read -p "请输入您要挂载到那个目录："  m         ; 
 #----------------------------------- 用户输入信息向上结束  -------------------------------
-gsh=$(parted -s $a print | grep primary || logical )
+gsh=$(parted -s $a print | grep primary  )
 
 # 定义一个变量 gsh  ； sed s/[[:space:]]//g 删除空格
 # parted -s $a print     打印要分区的磁盘信息$a为 /dev/xxx
@@ -75,14 +75,20 @@ y) echo "您确认了继续格式化操作,脚本将继续执行"
 exit                                                                    # 直接退出脚本
 ;;
 esac
+sleep 1
 parted -s $a mklabel gpt                      # 格式化为gpt 动态分区
+sleep 1
+parted -s $a unit s
  # msdos 其他类型
-parted -s $a mkpart primary 0 100%      # 分区 全部
+sleep 1
+parted -s $a mkpart data 2048s 100%      # 分区 全部
 #parted -s $a mkpart entended 3G 5G     # 第一个扩展分区:从3G 到5G
 #parted -s $a mkpart logic 5G 100%      # 第二个扩展分区:从5G到100%
 # logic [ˈlɒdʒɪk] 逻辑，分区
 #-------------------------------------挂载------------------------------------
+sleep 1
 b=$(echo $a"1")
+sleep 1
 mkfs -t ext4 $b                                 # 格式化分区
 rm -rf $m
 mkdir $m
@@ -93,9 +99,7 @@ bd=$(blkid $b | awk -F '=' '{print substr($2, 2, length($2)-7)}')
 # 坐标：第一行，第3列
 sed -i "/"eiscparted"/d" /etc/fstab             #先清除启动挂载
 sed -i "/^$/d" /etc/fstab                # 清除空行
-echo "
-UUID=$bd           $m                            ext4      defaults        0 2                #eiscparted
-">>/etc/fstab     
+echo "UUID=$bd           $m                            ext4      defaults        0 2                #eiscparted">>/etc/fstab     
 sudo mount -a                              # 开机自动挂载，字符单独一行，才会保留格式
 echo "再次查看挂载的磁盘，如果之前有挂载过此硬盘，重启生效挂载到新目录
 "

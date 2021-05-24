@@ -71,15 +71,16 @@ function cashout() {
   done
   info="节点:"
   info2="合约Address:"
-  local address =$(curl -s "$DEBUG_API$port/chequebook/address | jq .chequebookaddress")
-  local addr=$(curl -s "$DEBUG_API$port/address | jq .ethereum")
-  local peer_num=$(curl -s "$DEBUG_API$port/peers | jq '.peers | length")
-  echo "节点: $prot 节点地址: $addr 合约Address: $address    节点链接数: $peer_num | result: $result \r\n" > /root/mnt/bee/success.log 2>&1
+  local address =$(curl -s $DEBUG_API$port/chequebook/address | jq '.chequebookaddress')
+  local addr=$(curl -s $DEBUG_API$port/address | jq '.ethereum')
+  local peer_num=$(curl -s $DEBUG_API$port/peers | jq '.peers | length')
+  echo "节点: $prot 节点地址: $addr 合约Address: $address    节点链接数: $peer_num | result: $result | txHash: $txHash\r\n" > /root/mnt/bee/success_$port.log 2>&1
 }
 
 
 function cashoutAll() {
   local minAmount=$1
+  
   for port in ${port_arr[@]}
   do
     for peer in $(getPeers $port)
@@ -95,20 +96,29 @@ function cashoutAll() {
 }
 
 function listAllUncashed() {
+  counts=0
+  no_cash=0
   for port in ${port_arr[@]}
   do
     echo "list $port"
     for peer in $(getPeers $port)
     do
       echo $peer
+      let counts+=1
       local uncashedAmount=$(getUncashedAmount $peer $port)
       if (( "$uncashedAmount" > 0 ))
       then
+        let no_cash+=1
         echo $peer $uncashedAmount
       fi
     done
   done
+  echo chequebook total: $counts
+  echo chequebook no cash total: $no_cash
 }
+
+
+
 
 
 case $1 in

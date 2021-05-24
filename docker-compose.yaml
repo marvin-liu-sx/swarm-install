@@ -61,6 +61,7 @@ services:
     command: start
     depends_on:
       - clef
+      
 
 
   clef2:
@@ -124,6 +125,7 @@ services:
     depends_on:
       - clef2
       
+      
   clef3:
     image: ethersphere/clef:0.4.9
     restart: unless-stopped
@@ -184,6 +186,7 @@ services:
     command: start
     depends_on:
       - clef3
+      
 
   clef4:
     image: ethersphere/clef:0.4.9
@@ -245,6 +248,7 @@ services:
     command: start
     depends_on:
       - clef4
+      
       
 
   clef5:
@@ -308,6 +312,7 @@ services:
     depends_on:
       - clef5
       
+      
 
   clef6:
     image: ethersphere/clef:0.4.9
@@ -368,7 +373,8 @@ services:
       - bee-6:/home/bee/.bee
     command: start
     depends_on:
-      - clef6    
+      - clef6
+          
 
   clef7:
     image: ethersphere/clef:0.4.9
@@ -430,6 +436,7 @@ services:
     command: start
     depends_on:
       - clef7
+      
 
   clef8:
     image: ethersphere/clef:0.4.9
@@ -491,6 +498,7 @@ services:
     command: start
     depends_on:
       - clef8
+      
 
   clef9:
     image: ethersphere/clef:0.4.9
@@ -552,6 +560,7 @@ services:
     command: start
     depends_on:
       - clef9
+      
 
   clef10:
     image: ethersphere/clef:0.4.9
@@ -613,6 +622,7 @@ services:
     command: start
     depends_on:
       - clef10
+      
 
 
   clef11:
@@ -675,6 +685,7 @@ services:
     command: start
     depends_on:
       - clef11
+      
 
   clef12:
     image: ethersphere/clef:0.4.9
@@ -736,6 +747,7 @@ services:
     command: start
     depends_on:
       - clef12
+      
 
   clef13:
     image: ethersphere/clef:0.4.9
@@ -797,6 +809,7 @@ services:
     command: start
     depends_on:
       - clef13
+      
 
   clef14:
     image: ethersphere/clef:0.4.9
@@ -858,6 +871,7 @@ services:
     command: start
     depends_on:
       - clef14
+      
 
   clef15:
     image: ethersphere/clef:0.4.9
@@ -919,6 +933,7 @@ services:
     command: start
     depends_on:
       - clef15
+      
 
   clef16:
     image: ethersphere/clef:0.4.9
@@ -980,6 +995,7 @@ services:
     command: start
     depends_on:
       - clef16
+      
 
   clef17:
     image: ethersphere/clef:0.4.9
@@ -1041,6 +1057,7 @@ services:
     command: start
     depends_on:
       - clef17
+      
 
   clef18:
     image: ethersphere/clef:0.4.9
@@ -1102,6 +1119,7 @@ services:
     command: start
     depends_on:
       - clef18
+      
 
   clef19:
     image: ethersphere/clef:0.4.9
@@ -1163,6 +1181,7 @@ services:
     command: start
     depends_on:
       - clef19
+      
 
   clef20:
     image: ethersphere/clef:0.4.9
@@ -1224,6 +1243,7 @@ services:
     command: start
     depends_on:
       - clef20
+      
 
   # clef21:
   #   image: ethersphere/clef:0.4.9
