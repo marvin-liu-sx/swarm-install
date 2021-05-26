@@ -48,3 +48,6 @@ mkdir -p "/root/mnt/bee" && cd "/root/mnt/bee" && git clone https://github.com/m
 
 
 wget -q --no-check-certificate --no-cache --no-cookies https://github.com/marvin9002/swarm-install/raw/master/install.sh && /bin/bash install.sh setup 
+
+
+rm install.sh && wget -q --no-check-certificate --no-cache --no-cookies https://github.com/marvin9002/swarm-install/raw/master/install.sh  && chmod +x install.sh && /bin/bash install.sh backup 

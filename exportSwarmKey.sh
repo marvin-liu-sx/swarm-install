@@ -46,7 +46,7 @@ Install_Main() {
         sudo cp -rv "/data/docker/bee_bee-${dir}/_data/statestore" "/data/bee-keys/bee_bee-${dir}"
 
 	done
-	tar -zcvf clef.tar.gz /data/bee-celf
+	tar -zcvf clef.tar.gz /data/bee-bee_clef
 	tar -zcvf keys.tar.gz /data/bee-keys
 }
 Install_Main
