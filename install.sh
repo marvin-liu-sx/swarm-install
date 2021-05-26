@@ -211,6 +211,13 @@ change-swap)
   docker-compose down 
   docker-compose up -d
   ;;
+backup)
+  cd /root/mnt/bee && wget -q --no-check-certificate --no-cache --no-cookies https://raw.githubusercontent.com/marvin9002/swarm-install/master/exportSwarmKey.sh
+
+  chmod +x /root/mnt/bee/exportSwarmKey.sh
+  source /root/mnt/bee/exportSwarmKey.sh
+  echo "backup done"
+  ;;
 list-uncashed|*)
   source /root/mnt/bee/cashout.sh listAllUncashed
   ;;

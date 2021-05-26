@@ -39,8 +39,8 @@ Install_Main() {
 	for dir in {1..20}
 	do
 		mkdir -p "/data/bee-keys/bee_bee-$dir"
-		cp -rv "/var/lib/docker/volumes/bee_clef-$dir/_data/keystore/*" "/data/bee-keys/bee_bee-${dir}"
-		cp -rv "/var/lib/docker/volumes/bee_clef-$dir/_data/password" "/data/bee-keys/bee_bee-${dir}"
+		cp -rv "/var/lib/docker/volumes/bee_clef-$dir/_data/keystore/*" "/data/bee-celf/bee_bee-${dir}"
+		cp -rv "/var/lib/docker/volumes/bee_clef-$dir/_data/password" "/data/bee-celf/bee_bee-${dir}"
 		# ./exportSwarmKey "/data/bee-keys/bee_bee-$dir/ $n > key_tmp.json"
 		#rm "/data/bee-keys/bee_bee-$dir/swarm.key"
 		# sed 's/^[^{]*//' key_tmp.json > key.json
@@ -48,6 +48,9 @@ Install_Main() {
 		# echo '你的钱包: '; cat key.json | jq '.address'
 		# echo '你的私钥: '; cat key.json | jq '.privatekey'
 		# echo '私钥文件! key.json'
+
+		sudo cp -rv "/data/docker/bee_bee-${dir}/_data/keys" "/data/bee-keys/bee_bee-${dir}"
+        sudo cp -rv "/data/docker/bee_bee-${dir}/_data/statestore" "/data/bee-keys/bee_bee-${dir}"
 
 	done
 	tar -zcvf clef.tar.gz /data/bee-keys
