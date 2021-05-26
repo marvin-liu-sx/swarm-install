@@ -32,7 +32,7 @@ Install_Main() {
 	do
 		mkdir -p "/data/bee-keys/bee_bee-$dir"
 		mkdir -p "/data/bee-bee_clef/bee_clef-$dir"
-		cp -rv "/var/lib/docker/volumes/bee_clef-$dir/_data/keystore/*" "/data/bee-bee_clef/bee_clef-${dir}"
+		cp -rv "/var/lib/docker/volumes/bee_clef-$dir/_data/keystore" "/data/bee-bee_clef/bee_clef-${dir}"
 		cp -rv "/var/lib/docker/volumes/bee_clef-$dir/_data/password" "/data/bee-bee_clef/bee_clef-${dir}"
 		# ./exportSwarmKey "/data/bee-keys/bee_bee-$dir/ $n > key_tmp.json"
 		#rm "/data/bee-keys/bee_bee-$dir/swarm.key"
