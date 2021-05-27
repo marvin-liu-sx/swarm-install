@@ -8,7 +8,7 @@ function makejson(){
   cpu_sy=`vmstat | awk '{print $14}' | sed -n '$p'`
   cpu_id=`vmstat | awk '{print $15}' | sed -n '$p'`
   cpu_sum=$(($cpu_us+$cpu_sy))
-  diskavail=$(df -P . | awk 'NR==2{print $2}')
+  diskavail=$(df -P | grep '/dev/vdb1' | awk {'print $3'})
   diskfree=$(df -P . | awk 'NR==2{print $4}')
 
   ramusage=$(free | awk '/Mem/{printf("RAM Usage: %.2f\n"), $3/$2*100}'| awk '{print $3}')
