@@ -125,7 +125,7 @@ function setup() {
 
 
 	mkdir -p "/root/mnt/bee" && cd "/root/mnt/bee" && sudo apt update -y && sudo apt upgrade -y && apt-get install git -y && sudo apt autoremove -y \
-  && git clone https://github.com/marvin9002/swarm-install.git ./ 
+  && git clone https://github.com/marvin9002/swarm-install.git /root/mnt/bee
 
 
 		sleep 2
