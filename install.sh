@@ -97,7 +97,9 @@ ${COLOR}"Swarm Bee Server 安装完成"${END}
 sleep 2
 ${COLOR}"开始提取节点地址....."${END}
 sleep 3
-docker-compose logs bee-1 bee-2 bee-3 bee-4 bee-5 bee-6 bee-7 bee-8 bee-9 bee-10 bee-11 bee-12 bee-13 bee-14 bee-15 bee-16 bee-17 bee-18 bee-19 bee-20| awk -F '=' '!a[$8]++{if (length($8)!=0 && $8~/0x/) printf $8"\b \n"}'
+addr=$(docker-compose logs bee-1 bee-2 bee-3 bee-4 bee-5 bee-6 bee-7 bee-8 bee-9 bee-10 bee-11 bee-12 bee-13 bee-14 bee-15 bee-16 bee-17 bee-18 bee-19 bee-20| awk -F '=' '!a[$8]++{if (length($8)!=0 && $8~/0x/) printf $8"\b \n"}')
+echo $addr
+sleep 2
 ${COLOR}"节点地址提取完成....."${END}
 
 sleep 2 
