@@ -105,6 +105,9 @@ swap)
 30)
   docker-compose -f /root/mnt/bee/docker-compose-30.yaml up -d
   ;;
+6)
+  docker-compose -f /root/mnt/bee/docker-compose-30-6.yaml up -d
+  ;;
 *)
   docker-compose up -d
   ;;
@@ -120,7 +123,7 @@ case $num in
 30)
   for dir in {1..30}
   do
-    docker-compose -f /root/mnt/bee/docker-compose-30.yaml logs bee-$dir| awk -F '=' '!a[$8]++{if (length($8)!=0 && $8~/0x/) printf $8"\b \n"}'
+    docker-compose -f /root/mnt/bee/docker-compose-30.yaml logs bee-$dir| awk -F 'available on' '!a[$2]++{if (length($2)!=0) printf "0x"$2"\n"}'|sed 's/ //g'|sed s/.$//g
   done
  ;;
 *)
@@ -216,6 +219,9 @@ setup)
   ;;
 setup-30)
   setup 30 30
+  ;;
+setup-6)
+  setup 30 6
   ;;
 export)
   source /root/mnt/bee/exportSwarmKey.sh
