@@ -120,7 +120,7 @@ case $num in
 30)
   for dir in {1..30}
   do
-    docker-compose logs bee-$dir| awk -F '=' '!a[$8]++{if (length($8)!=0 && $8~/0x/) printf $8"\b \n"}'
+    docker-compose -f /root/mnt/bee/docker-compose-30.yaml logs bee-$dir| awk -F '=' '!a[$8]++{if (length($8)!=0 && $8~/0x/) printf $8"\b \n"}'
   done
  ;;
 *)
