@@ -59,14 +59,15 @@ docker-compose --version &&  ${COLOR}"Docker Compose 安装完成"${END} ||  ${C
 start_swarm_bee(){
   num=$1
 ${COLOR}"开始安装 Swarm Bee Server....."${END}
-sleep 2
-apt-get install jq -y
-mv /root/mnt/bee/env-file /root/mnt/bee/.env
-sleep 1
-mkdir -p "/data/docker/goerli-1/_data"
+
 
 case $num in
 30)
+  sleep 2
+  apt-get install jq -y
+  mv /root/mnt/bee/env-file2 /root/mnt/bee/.env
+  sleep 1
+  mkdir -p "/data/docker/goerli-1/_data"
   for dir in {1..30}
   do
     echo create data for $dir ...
@@ -76,13 +77,18 @@ case $num in
   done
  ;;
 *)
-for dir in {1..20}
-do
-  echo create data for $dir ...
-  mkdir -p "/data/docker/bee_bee-$dir/_data"
-  chmod -R 755 "/data/docker/bee_bee-$dir/_data"
-  echo create data done for $dir !!!
-done
+  sleep 2
+  apt-get install jq -y
+  mv /root/mnt/bee/env-file /root/mnt/bee/.env
+  sleep 1
+  mkdir -p "/data/docker/goerli-1/_data"
+  for dir in {1..20}
+  do
+    echo create data for $dir ...
+    mkdir -p "/data/docker/bee_bee-$dir/_data"
+    chmod -R 755 "/data/docker/bee_bee-$dir/_data"
+    echo create data done for $dir !!!
+  done
  ;;
 esac
 
