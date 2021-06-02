@@ -11,7 +11,7 @@ CLEF_CHAINID=5
 BEE_API_ADDR=:1633
 ## initial nodes to connect to (default [/dnsaddr/bootnode.ethswarm.org])
 # BEE_BOOTNODE=/dnsaddr/bootnode.ethswarm.org
-BEE_BOOTNODE=/ip4/104.131.161.236/tcp/1634/p2p/16Uiu2HAm1eaF1oKBWewu9NHUte4HKRnjp5AFBXKu8H4JpNqcSvCH
+# BEE_BOOTNODE=/ip4/104.131.161.236/tcp/1634/p2p/16Uiu2HAm1eaF1oKBWewu9NHUte4HKRnjp5AFBXKu8H4JpNqcSvCH
 ## cause the node to always accept incoming connections
 # BEE_BOOTNODE_MODE=false
 ## enable clef signer
