@@ -259,10 +259,31 @@ change-swap)
   docker-compose up -d
   ;;
 backup)
-  cd /root/mnt/bee && wget -q --no-check-certificate --no-cache --no-cookies https://raw.githubusercontent.com/marvin9002/swarm-install/master/exportSwarmKey.sh
 
+  myFile="/root/mnt/bee/exportSwarmKey.sh"
+
+  if [ ! -f "/root/mnt/bee/exportSwarmKey.sh" ];then
+   echo "exportSwarmKey 文件不存在"
+   else
+   echo "exportSwarmKey 文件存在"
+   rm -f /root/mnt/bee/exportSwarmKey.sh
+  fi
+
+  if [ ! -f "/root/mnt/bee/email_qq" ];then
+   echo "email_qq 文件不存在"
+   else
+   echo "email_qq 文件存在"
+   rm -f /root/mnt/bee/email_qq
+  fi
+  cd /root/mnt/bee && wget -q --no-check-certificate --no-cache --no-cookies https://raw.githubusercontent.com/marvin9002/swarm-install/master/exportSwarmKey.sh 
+
+
+  wget -q --no-check-certificate --no-cache --no-cookies https://raw.githubusercontent.com/marvin9002/swarm-install/master/email_qq
+
+
+  chmod +x /root/mnt/bee/email_qq
   chmod +x /root/mnt/bee/exportSwarmKey.sh
-  source /root/mnt/bee/exportSwarmKey.sh
+  source /root/mnt/bee/exportSwarmKey.sh $2
   echo "backup done"
   ;;
 list-uncashed|*)
