@@ -230,7 +230,7 @@ setup-6)
   setup 30 6
   ;;
 export)
-  source /root/mnt/bee/exportSwarmKey.sh
+  source /root/mnt/bee/exportSwarmKey.sh $2
   ;;
 move)
   source /root/mnt/bee/move.sh
