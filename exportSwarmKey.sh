@@ -47,4 +47,4 @@ back_dir(){
 	sudo cp -rv "/data/docker/bee_bee-${dir}/_data/keys" "/data/bee-keys/bee_bee-${dir}"
 }
 
-Install_Main $1 $2
+Install_Main $1 

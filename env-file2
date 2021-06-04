@@ -94,4 +94,4 @@ BEE_SWAP_ENDPOINT=http://8.209.241.89:8545
 ## log verbosity level 0=silent, 1=error, 2=warn, 3=info, 4=debug, 5=trace (default info)
 BEE_VERBOSITY=5
 ## send a welcome message string during handshakes
-# BEE_WELCOME_MESSAGE=
+# BEE_WELCOME_MESSAGE=Marvin.Pool Wow Wow ~~~~
