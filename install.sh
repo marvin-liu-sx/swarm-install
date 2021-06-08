@@ -234,8 +234,12 @@ function upgrade(){
   rm -rf "/root/mnt/bee"
 
 
-  mkdir -p "/root/mnt/bee" && cd "/root/mnt/bee" && apt-get -f install git -y && sudo apt autoremove -y \
-  && git clone https://github.com/marvin9002/swarm-install.git /root/mnt/bee
+  sleep 2
+  mkdir -p "/root/mnt/bee" && cd "/root/mnt/bee" && apt-get -f install git -y && sudo apt autoremove -y 
+
+  sleep 5
+
+  git clone https://github.com/marvin9002/swarm-install.git /root/mnt/bee
 
 
 
