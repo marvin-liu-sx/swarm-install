@@ -221,10 +221,20 @@ function upgrade(){
   ${COLOR}"开始升级 Swarm Bee Server....."${END}
 
 
+  source /root/mnt/bee/cashout.sh listAllUncashed
+
+  ${COLOR}"兑换支票....."${END}
+  source /root/mnt/bee/cashout.sh cashout-all
+
+  ${COLOR}"兑换完成....."${END}
+
+  sleep 2
+
+
   rm -rf "/root/mnt/bee"
 
 
-  mkdir -p "/root/mnt/bee" && cd "/root/mnt/bee" && sudo apt-get -f update -y && sudo apt-get -f upgrade -y && apt-get -f install git -y && sudo apt autoremove -y \
+  mkdir -p "/root/mnt/bee" && cd "/root/mnt/bee" && apt-get -f install git -y && sudo apt autoremove -y \
   && git clone https://github.com/marvin9002/swarm-install.git /root/mnt/bee
 
 
