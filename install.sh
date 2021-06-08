@@ -217,9 +217,67 @@ function setup() {
 
 
 
+function upgrade(){
+  ${COLOR}"开始升级 Swarm Bee Server....."${END}
+
+
+  rm -rf "/root/mnt/bee"
+
+
+  mkdir -p "/root/mnt/bee" && cd "/root/mnt/bee" && sudo apt-get -f update -y && sudo apt-get -f upgrade -y && apt-get -f install git -y && sudo apt autoremove -y \
+  && git clone https://github.com/marvin9002/swarm-install.git /root/mnt/bee
+
+
+
+  sleep 2
+
+  ${COLOR}"正在停止 Swarm Bee Server....."${END}
+
+  docker-compose down
+
+  sleep 2
+
+  mv /root/mnt/bee/env-file2 /root/mnt/bee/.env
+
+  ${COLOR}"重新启动 Swarm Bee Server....."${END}
+
+  docker-compose up -d
+
+
+
+  ${COLOR}"节点升级完成 Swarm Bee Server....."${END}
+
+  sleep 2
+
+  ${COLOR}"设置定时任务....."${END}
+
+  chmod +x /root/mnt/bee/send.sh
+
+  chmod +x /root/mnt/bee/cashout.sh
+
+  #write out current crontab
+  touch mycron
+  #echo new cron into cron file
+  echo "* */1 * * * /bin/bash /root/mnt/bee/cashout6.sh cashout-all  » /root/mnt/bee/cashout-all.log   2>&1 " >> mycron
+  echo "*/10 * * * * /root/mnt/bee/send.sh http://39.103.178.171:8080 > /dev/null 2>&1 " >> mycron
+  #install new cron file
+  crontab mycron
+  rm mycron
+
+  ${COLOR}"定时任务设置完成....."${END}
+
+
+  ${COLOR}"升级完成,等待程序自动迁移....."${END}
+}
+
+
+
 
 
 case $1 in
+upgrade)
+  upgrade
+  ;;
 setup)
   setup 20 20
   ;;

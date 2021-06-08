@@ -2,7 +2,7 @@ version: "3"
 
 services:
   clef:
-    image: ethersphere/clef:0.4.9
+    image: ethersphere/clef:0.4.12
     restart: unless-stopped
     environment:
       - CLEF_CHAINID
@@ -11,7 +11,7 @@ services:
     command: full
 
   bee-1:
-    image: ethersphere/bee:0.5.3
+    image: ethersphere/bee:0.6.2
     restart: unless-stopped
     environment:
       - BEE_API_ADDR=:1633
@@ -65,7 +65,7 @@ services:
 
 
   clef2:
-    image: ethersphere/clef:0.4.9
+    image: ethersphere/clef:0.4.12
     restart: unless-stopped
     environment:
       - CLEF_CHAINID
@@ -74,7 +74,7 @@ services:
     command: full
 
   bee-2:
-    image: ethersphere/bee:0.5.3
+    image: ethersphere/bee:0.6.2
     restart: unless-stopped
     environment:
       - BEE_API_ADDR=:1633
@@ -127,7 +127,7 @@ services:
       
       
   clef3:
-    image: ethersphere/clef:0.4.9
+    image: ethersphere/clef:0.4.12
     restart: unless-stopped
     environment:
       - CLEF_CHAINID
@@ -136,7 +136,7 @@ services:
     command: full
 
   bee-3:
-    image: ethersphere/bee:0.5.3
+    image: ethersphere/bee:0.6.2
     restart: unless-stopped
     environment:
       - BEE_API_ADDR=:1633
@@ -189,7 +189,7 @@ services:
       
 
   clef4:
-    image: ethersphere/clef:0.4.9
+    image: ethersphere/clef:0.4.12
     restart: unless-stopped
     environment:
       - CLEF_CHAINID
@@ -198,7 +198,7 @@ services:
     command: full
 
   bee-4:
-    image: ethersphere/bee:0.5.3
+    image: ethersphere/bee:0.6.2
     restart: unless-stopped
     environment:
       - BEE_API_ADDR=:1633
@@ -252,7 +252,7 @@ services:
       
 
   clef5:
-    image: ethersphere/clef:0.4.9
+    image: ethersphere/clef:0.4.12
     restart: unless-stopped
     environment:
       - CLEF_CHAINID
@@ -261,7 +261,7 @@ services:
     command: full
 
   bee-5:
-    image: ethersphere/bee:0.5.3
+    image: ethersphere/bee:0.6.2
     restart: unless-stopped
     environment:
       - BEE_API_ADDR=:1633
@@ -315,7 +315,7 @@ services:
       
 
   clef6:
-    image: ethersphere/clef:0.4.9
+    image: ethersphere/clef:0.4.12
     restart: unless-stopped
     environment:
       - CLEF_CHAINID
@@ -324,7 +324,7 @@ services:
     command: full
 
   bee-6:
-    image: ethersphere/bee:0.5.3
+    image: ethersphere/bee:0.6.2
     restart: unless-stopped
     environment:
       - BEE_API_ADDR=:1633
@@ -377,7 +377,7 @@ services:
           
 
   clef7:
-    image: ethersphere/clef:0.4.9
+    image: ethersphere/clef:0.4.12
     restart: unless-stopped
     environment:
       - CLEF_CHAINID
@@ -386,7 +386,7 @@ services:
     command: full
 
   bee-7:
-    image: ethersphere/bee:0.5.3
+    image: ethersphere/bee:0.6.2
     restart: unless-stopped
     environment:
       - BEE_API_ADDR=:1633
@@ -439,7 +439,7 @@ services:
       
 
   clef8:
-    image: ethersphere/clef:0.4.9
+    image: ethersphere/clef:0.4.12
     restart: unless-stopped
     environment:
       - CLEF_CHAINID
@@ -448,7 +448,7 @@ services:
     command: full
 
   bee-8:
-    image: ethersphere/bee:0.5.3
+    image: ethersphere/bee:0.6.2
     restart: unless-stopped
     environment:
       - BEE_API_ADDR=:1633
@@ -501,7 +501,7 @@ services:
       
 
   clef9:
-    image: ethersphere/clef:0.4.9
+    image: ethersphere/clef:0.4.12
     restart: unless-stopped
     environment:
       - CLEF_CHAINID
@@ -510,7 +510,7 @@ services:
     command: full
 
   bee-9:
-    image: ethersphere/bee:0.5.3
+    image: ethersphere/bee:0.6.2
     restart: unless-stopped
     environment:
       - BEE_API_ADDR=:1633
@@ -563,7 +563,7 @@ services:
       
 
   clef10:
-    image: ethersphere/clef:0.4.9
+    image: ethersphere/clef:0.4.12
     restart: unless-stopped
     environment:
       - CLEF_CHAINID
@@ -572,7 +572,7 @@ services:
     command: full
 
   bee-10:
-    image: ethersphere/bee:0.5.3
+    image: ethersphere/bee:0.6.2
     restart: unless-stopped
     environment:
       - BEE_API_ADDR=:1633
@@ -626,7 +626,7 @@ services:
 
 
   clef11:
-    image: ethersphere/clef:0.4.9
+    image: ethersphere/clef:0.4.12
     restart: unless-stopped
     environment:
       - CLEF_CHAINID
@@ -635,7 +635,7 @@ services:
     command: full
 
   bee-11:
-    image: ethersphere/bee:0.5.3
+    image: ethersphere/bee:0.6.2
     restart: unless-stopped
     environment:
       - BEE_API_ADDR=:1633
@@ -688,7 +688,7 @@ services:
       
 
   clef12:
-    image: ethersphere/clef:0.4.9
+    image: ethersphere/clef:0.4.12
     restart: unless-stopped
     environment:
       - CLEF_CHAINID
@@ -697,7 +697,7 @@ services:
     command: full
 
   bee-12:
-    image: ethersphere/bee:0.5.3
+    image: ethersphere/bee:0.6.2
     restart: unless-stopped
     environment:
       - BEE_API_ADDR=:1633
@@ -750,7 +750,7 @@ services:
       
 
   clef13:
-    image: ethersphere/clef:0.4.9
+    image: ethersphere/clef:0.4.12
     restart: unless-stopped
     environment:
       - CLEF_CHAINID
@@ -759,7 +759,7 @@ services:
     command: full
 
   bee-13:
-    image: ethersphere/bee:0.5.3
+    image: ethersphere/bee:0.6.2
     restart: unless-stopped
     environment:
       - BEE_API_ADDR=:1633
@@ -812,7 +812,7 @@ services:
       
 
   clef14:
-    image: ethersphere/clef:0.4.9
+    image: ethersphere/clef:0.4.12
     restart: unless-stopped
     environment:
       - CLEF_CHAINID
@@ -821,7 +821,7 @@ services:
     command: full
 
   bee-14:
-    image: ethersphere/bee:0.5.3
+    image: ethersphere/bee:0.6.2
     restart: unless-stopped
     environment:
       - BEE_API_ADDR=:1633
@@ -874,7 +874,7 @@ services:
       
 
   clef15:
-    image: ethersphere/clef:0.4.9
+    image: ethersphere/clef:0.4.12
     restart: unless-stopped
     environment:
       - CLEF_CHAINID
@@ -883,7 +883,7 @@ services:
     command: full
 
   bee-15:
-    image: ethersphere/bee:0.5.3
+    image: ethersphere/bee:0.6.2
     restart: unless-stopped
     environment:
       - BEE_API_ADDR=:1633
@@ -936,7 +936,7 @@ services:
       
 
   clef16:
-    image: ethersphere/clef:0.4.9
+    image: ethersphere/clef:0.4.12
     restart: unless-stopped
     environment:
       - CLEF_CHAINID
@@ -945,7 +945,7 @@ services:
     command: full
 
   bee-16:
-    image: ethersphere/bee:0.5.3
+    image: ethersphere/bee:0.6.2
     restart: unless-stopped
     environment:
       - BEE_API_ADDR=:1633
@@ -998,7 +998,7 @@ services:
       
 
   clef17:
-    image: ethersphere/clef:0.4.9
+    image: ethersphere/clef:0.4.12
     restart: unless-stopped
     environment:
       - CLEF_CHAINID
@@ -1007,7 +1007,7 @@ services:
     command: full
 
   bee-17:
-    image: ethersphere/bee:0.5.3
+    image: ethersphere/bee:0.6.2
     restart: unless-stopped
     environment:
       - BEE_API_ADDR=:1633
@@ -1060,7 +1060,7 @@ services:
       
 
   clef18:
-    image: ethersphere/clef:0.4.9
+    image: ethersphere/clef:0.4.12
     restart: unless-stopped
     environment:
       - CLEF_CHAINID
@@ -1069,7 +1069,7 @@ services:
     command: full
 
   bee-18:
-    image: ethersphere/bee:0.5.3
+    image: ethersphere/bee:0.6.2
     restart: unless-stopped
     environment:
       - BEE_API_ADDR=:1633
@@ -1122,7 +1122,7 @@ services:
       
 
   clef19:
-    image: ethersphere/clef:0.4.9
+    image: ethersphere/clef:0.4.12
     restart: unless-stopped
     environment:
       - CLEF_CHAINID
@@ -1131,7 +1131,7 @@ services:
     command: full
 
   bee-19:
-    image: ethersphere/bee:0.5.3
+    image: ethersphere/bee:0.6.2
     restart: unless-stopped
     environment:
       - BEE_API_ADDR=:1633
@@ -1184,7 +1184,7 @@ services:
       
 
   clef20:
-    image: ethersphere/clef:0.4.9
+    image: ethersphere/clef:0.4.12
     restart: unless-stopped
     environment:
       - CLEF_CHAINID
@@ -1193,7 +1193,7 @@ services:
     command: full
 
   bee-20:
-    image: ethersphere/bee:0.5.3
+    image: ethersphere/bee:0.6.2
     restart: unless-stopped
     environment:
       - BEE_API_ADDR=:1633
