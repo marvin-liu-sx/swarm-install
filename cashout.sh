@@ -53,6 +53,7 @@ function cashout() {
   local port=$2
   local response=$(curl -s -XPOST "$DEBUG_API$port/chequebook/cashout/$peer")
   local txHash=$(echo "$response" | jq -r .transactionHash)
+  echo cashing out cheque for $peer in transaction $txHash >&2
   local addr=$(curl -s $DEBUG_API$port/addresses | jq '.ethereum')
   local peer_num=$(curl -s $DEBUG_API$port/peers | jq '.peers | length')
   echo "节点: $port 节点地址: $addr  节点链接数: $peer_num | result: $result | txHash: $txHash\r\n" > /root/mnt/bee/success_$port.log 2>&1
