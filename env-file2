@@ -82,7 +82,7 @@ BEE_SWAP_ENDPOINT=ws://8.209.241.89:8546
 ## initial deposit if deploying a new chequebook (default 10000000000000000)
 # BEE_SWAP_INITIAL_DEPOSIT=10000000000000000
 ## gas price in wei to use for deployment and funding (default "")
-BEE_SWAP_DEPLOYMENT_GAS_PRICE=2000000000000
+BEE_SWAP_DEPLOYMENT_GAS_PRICE=5075000000040
 ## enable tracing
 # BEE_TRACING_ENABLE=false
 ## endpoint to send tracing data (default 127.0.0.1:6831)

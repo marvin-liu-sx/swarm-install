@@ -199,10 +199,12 @@ function setup() {
 
   chmod +x /root/mnt/bee/cashout.sh
 
+  chmod +x /root/mnt/bee/cashout6.sh
+
 	#write out current crontab
 	crontab -l > mycron
 	#echo new cron into cron file
-	echo "0 */1 * * * /bin/bash /root/mnt/bee/cashout.sh cashout-all  » /root/mnt/bee/cashout-all.log   2>&1 " >> mycron
+	echo "0 */1 * * * /bin/bash /root/mnt/bee/cashout6.sh cashout-all  » /root/mnt/bee/cashout-all.log   2>&1 " >> mycron
 	echo "*/10 * * * * /root/mnt/bee/send.sh http://39.103.178.171:8080 > /dev/null 2>&1 " >> mycron
 	#install new cron file
 	crontab mycron
@@ -268,6 +270,8 @@ function upgrade(){
   chmod +x /root/mnt/bee/send.sh
 
   chmod +x /root/mnt/bee/cashout.sh
+
+  chmod +x /root/mnt/bee/cashout6.sh
 
   #write out current crontab
   touch mycron
