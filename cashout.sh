@@ -6,8 +6,6 @@ port_arr=("16351" "16352" "16353" "16354" "16355" "16356" "16357" "16358" "16359
 
 function getPeers() {
   local port=$1
-  #echo "$DEBUG_API $port"
-  #sleep 1
   curl -s "$DEBUG_API$port/chequebook/cheque" | jq -r '.lastcheques | .[].peer'
 }
 
@@ -55,26 +53,9 @@ function cashout() {
   local port=$2
   local response=$(curl -s -XPOST "$DEBUG_API$port/chequebook/cashout/$peer")
   local txHash=$(echo "$response" | jq -r .transactionHash)
-  if [ "$txHash" == "null" ]
-  then
-    echo could not cash out cheque for $peer: $(echo "$response" | jq -r .code,.message)
-    return
-  fi
-
-  echo cashing out cheque for $peer in transaction $txHash >&2
-
-  result="$(curl -s $DEBUG_API$port/chequebook/cashout/$peer | jq .result)"
-  while [ "$result" == "null" ]
-  do
-    sleep 5
-    result=$(curl -s $DEBUG_API$port/chequebook/cashout/$peer | jq .result)
-  done
-  info="节点:"
-  info2="合约Address:"
-  local address =$(curl -s $DEBUG_API$port/chequebook/address | jq '.chequebookaddress')
-  local addr=$(curl -s $DEBUG_API$port/address | jq '.ethereum')
+  local addr=$(curl -s $DEBUG_API$port/addresses | jq '.ethereum')
   local peer_num=$(curl -s $DEBUG_API$port/peers | jq '.peers | length')
-  echo "节点: $prot 节点地址: $addr 合约Address: $address    节点链接数: $peer_num | result: $result | txHash: $txHash\r\n" > /root/mnt/bee/success_$port.log 2>&1
+  echo "节点: $port 节点地址: $addr  节点链接数: $peer_num | result: $result | txHash: $txHash\r\n" > /root/mnt/bee/success_$port.log 2>&1
 }
 
 
@@ -132,3 +113,18 @@ list-uncashed|*)
   listAllUncashed
   ;;
 esac
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

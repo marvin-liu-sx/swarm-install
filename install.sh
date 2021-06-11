@@ -261,7 +261,7 @@ function upgrade(){
 
   ${COLOR}"兑换支票....."${END}
   chmod +x /root/mnt/bee/cashout6.sh
-  source /root/mnt/bee/cashout6.sh cashout-all
+  source /root/mnt/bee/cashout.sh cashout-all
 
   ${COLOR}"兑换完成....."${END}
 
