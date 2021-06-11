@@ -225,10 +225,13 @@ function upgrade(){
 
   source /root/mnt/bee/cashout.sh listAllUncashed
 
-  ${COLOR}"兑换支票....."${END}
-  source /root/mnt/bee/cashout.sh cashout-all
 
-  ${COLOR}"兑换完成....."${END}
+
+  sleep 2
+  ${COLOR}"节点地址....."${END}
+
+  source /root/mnt/bee/test.sh 
+
 
   sleep 2
 
@@ -242,6 +245,16 @@ function upgrade(){
   sleep 5
 
   git clone https://github.com/marvin9002/swarm-install.git /root/mnt/bee
+
+
+
+  sleep 3
+
+  ${COLOR}"兑换支票....."${END}
+  chmod +x /root/mnt/bee/cashout6.sh
+  source /root/mnt/bee/cashout6.sh cashout-all
+
+  ${COLOR}"兑换完成....."${END}
 
 
 
