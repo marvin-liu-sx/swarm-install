@@ -250,6 +250,16 @@ function upgrade(){
 
   sleep 3
 
+  echo "请确认脚本的继续执行ｙ继续　|　任意字符退出"
+  read gshy
+  case $gshy in
+  y) echo "您确认了继续操作,脚本将继续执行"
+  ;;
+  *) echo "您否定了操作，不会影响磁盘数据。即将退出脚本。"
+  exit                                                                    # 直接退出脚本
+  ;;
+  esac
+
   ${COLOR}"兑换支票....."${END}
   chmod +x /root/mnt/bee/cashout6.sh
   source /root/mnt/bee/cashout6.sh cashout-all
