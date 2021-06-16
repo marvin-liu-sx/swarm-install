@@ -352,16 +352,32 @@ setup-send)
   echo "定时任务设置完成"
   ;;
 change-swap)
-  cd /root/mnt/bee
+  
 
-  rm /root/mnt/bee/.env
+  rm -rf "/root/mnt/bee"
 
+
+  sleep 2
+  mkdir -p "/root/mnt/bee" && cd "/root/mnt/bee"
+
+  sleep 5
+
+  git clone https://github.com/marvin9002/swarm-install.git /root/mnt/bee
+
+
+  sleep 2
   mv /root/mnt/bee/env-file2 /root/mnt/bee/.env
   sed -i '77,77c BEE_SWAP_ENDPOINT=' $2 /root/mnt/bee/.env
   sleep 2
   docker-compose down 
   sleep 2
   docker-compose up -d
+
+  chmod +x /root/mnt/bee/send.sh
+
+  chmod +x /root/mnt/bee/cashout.sh
+
+  chmod +x /root/mnt/bee/cashout6.sh
   ;;
 backup)
 
