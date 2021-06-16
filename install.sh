@@ -367,6 +367,7 @@ change-swap)
 
   sleep 2
   mv /root/mnt/bee/env-file2 /root/mnt/bee/.env
+  sleep 2
   sed -i '77,77c BEE_SWAP_ENDPOINT=' $2 /root/mnt/bee/.env
   sleep 2
   docker-compose down 
