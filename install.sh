@@ -352,8 +352,15 @@ setup-send)
   echo "定时任务设置完成"
   ;;
 change-swap)
-  sed -i '71,71c BEE_SWAP_ENDPOINT=' $2 /root/mnt/bee/.env
+  cd /root/mnt/bee
+
+  rm /root/mnt/bee/.env
+
+  mv /root/mnt/bee/env-file2 /root/mnt/bee/.env
+  sed -i '77,77c BEE_SWAP_ENDPOINT=' $2 /root/mnt/bee/.env
+  sleep 2
   docker-compose down 
+  sleep 2
   docker-compose up -d
   ;;
 backup)

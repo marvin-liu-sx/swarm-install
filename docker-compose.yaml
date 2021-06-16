@@ -52,6 +52,7 @@ services:
       - BEE_TRACING_SERVICE_NAME
       - BEE_VERBOSITY=5
       - BEE_WELCOME_MESSAGE
+      - BEE_FULL_NODE=true
     ports:
       - "${API_ADDR:-16331}${BEE_API_ADDR:-:1633}"
       - "${P2P_ADDR:-16341}${BEE_P2P_ADDR:-:1634}"
@@ -115,6 +116,7 @@ services:
       - BEE_TRACING_SERVICE_NAME
       - BEE_VERBOSITY=5
       - BEE_WELCOME_MESSAGE
+      - BEE_FULL_NODE=true
     ports:
       - "${API_ADDR:-16332}${BEE_API_ADDR:-:1633}"
       - "${P2P_ADDR:-16342}${BEE_P2P_ADDR:-:1634}"
@@ -177,6 +179,7 @@ services:
       - BEE_TRACING_SERVICE_NAME
       - BEE_VERBOSITY=5
       - BEE_WELCOME_MESSAGE
+      - BEE_FULL_NODE=true
     ports:
       - "${API_ADDR:-16333}${BEE_API_ADDR:-:1633}"
       - "${P2P_ADDR:-16343}${BEE_P2P_ADDR:-:1634}"
@@ -239,6 +242,7 @@ services:
       - BEE_TRACING_SERVICE_NAME
       - BEE_VERBOSITY=5
       - BEE_WELCOME_MESSAGE
+      - BEE_FULL_NODE=true
     ports:
       - "${API_ADDR:-16334}${BEE_API_ADDR:-:1633}"
       - "${P2P_ADDR:-16344}${BEE_P2P_ADDR:-:1634}"
@@ -302,6 +306,7 @@ services:
       - BEE_TRACING_SERVICE_NAME
       - BEE_VERBOSITY=5
       - BEE_WELCOME_MESSAGE
+      - BEE_FULL_NODE=true
     ports:
       - "${API_ADDR:-16335}${BEE_API_ADDR:-:1633}"
       - "${P2P_ADDR:-16345}${BEE_P2P_ADDR:-:1634}"
@@ -365,6 +370,7 @@ services:
       - BEE_TRACING_SERVICE_NAME
       - BEE_VERBOSITY=5
       - BEE_WELCOME_MESSAGE
+      - BEE_FULL_NODE=true
     ports:
       - "${API_ADDR:-16336}${BEE_API_ADDR:-:1633}"
       - "${P2P_ADDR:-16346}${BEE_P2P_ADDR:-:1634}"
@@ -427,6 +433,7 @@ services:
       - BEE_TRACING_SERVICE_NAME
       - BEE_VERBOSITY=5
       - BEE_WELCOME_MESSAGE
+      - BEE_FULL_NODE=true
     ports:
       - "${API_ADDR:-16337}${BEE_API_ADDR:-:1633}"
       - "${P2P_ADDR:-16347}${BEE_P2P_ADDR:-:1634}"
@@ -489,6 +496,7 @@ services:
       - BEE_TRACING_SERVICE_NAME
       - BEE_VERBOSITY=5
       - BEE_WELCOME_MESSAGE
+      - BEE_FULL_NODE=true
     ports:
       - "${API_ADDR:-16338}${BEE_API_ADDR:-:1633}"
       - "${P2P_ADDR:-16348}${BEE_P2P_ADDR:-:1634}"
@@ -551,6 +559,7 @@ services:
       - BEE_TRACING_SERVICE_NAME
       - BEE_VERBOSITY=5
       - BEE_WELCOME_MESSAGE
+      - BEE_FULL_NODE=true
     ports:
       - "${API_ADDR:-16339}${BEE_API_ADDR:-:1633}"
       - "${P2P_ADDR:-16349}${BEE_P2P_ADDR:-:1634}"
@@ -613,6 +622,7 @@ services:
       - BEE_TRACING_SERVICE_NAME
       - BEE_VERBOSITY=5
       - BEE_WELCOME_MESSAGE
+      - BEE_FULL_NODE=true
     ports:
       - "${API_ADDR:-17331}${BEE_API_ADDR:-:1633}"
       - "${P2P_ADDR:-17341}${BEE_P2P_ADDR:-:1634}"
@@ -676,6 +686,7 @@ services:
       - BEE_TRACING_SERVICE_NAME
       - BEE_VERBOSITY=5
       - BEE_WELCOME_MESSAGE
+      - BEE_FULL_NODE=true
     ports:
       - "${API_ADDR:-17332}${BEE_API_ADDR:-:1633}"
       - "${P2P_ADDR:-17342}${BEE_P2P_ADDR:-:1634}"
@@ -738,6 +749,7 @@ services:
       - BEE_TRACING_SERVICE_NAME
       - BEE_VERBOSITY=5
       - BEE_WELCOME_MESSAGE
+      - BEE_FULL_NODE=true
     ports:
       - "${API_ADDR:-17333}${BEE_API_ADDR:-:1633}"
       - "${P2P_ADDR:-17343}${BEE_P2P_ADDR:-:1634}"
@@ -800,6 +812,7 @@ services:
       - BEE_TRACING_SERVICE_NAME
       - BEE_VERBOSITY=5
       - BEE_WELCOME_MESSAGE
+      - BEE_FULL_NODE=true
     ports:
       - "${API_ADDR:-17334}${BEE_API_ADDR:-:1633}"
       - "${P2P_ADDR:-17344}${BEE_P2P_ADDR:-:1634}"
@@ -862,6 +875,7 @@ services:
       - BEE_TRACING_SERVICE_NAME
       - BEE_VERBOSITY=5
       - BEE_WELCOME_MESSAGE
+      - BEE_FULL_NODE=true
     ports:
       - "${API_ADDR:-17335}${BEE_API_ADDR:-:1633}"
       - "${P2P_ADDR:-17345}${BEE_P2P_ADDR:-:1634}"
@@ -924,6 +938,7 @@ services:
       - BEE_TRACING_SERVICE_NAME
       - BEE_VERBOSITY=5
       - BEE_WELCOME_MESSAGE
+      - BEE_FULL_NODE=true
     ports:
       - "${API_ADDR:-17336}${BEE_API_ADDR:-:1633}"
       - "${P2P_ADDR:-17346}${BEE_P2P_ADDR:-:1634}"
@@ -986,6 +1001,7 @@ services:
       - BEE_TRACING_SERVICE_NAME
       - BEE_VERBOSITY=5
       - BEE_WELCOME_MESSAGE
+      - BEE_FULL_NODE=true
     ports:
       - "${API_ADDR:-17337}${BEE_API_ADDR:-:1633}"
       - "${P2P_ADDR:-17347}${BEE_P2P_ADDR:-:1634}"
@@ -1048,6 +1064,7 @@ services:
       - BEE_TRACING_SERVICE_NAME
       - BEE_VERBOSITY=5
       - BEE_WELCOME_MESSAGE
+      - BEE_FULL_NODE=true
     ports:
       - "${API_ADDR:-17338}${BEE_API_ADDR:-:1633}"
       - "${P2P_ADDR:-17348}${BEE_P2P_ADDR:-:1634}"
@@ -1110,6 +1127,7 @@ services:
       - BEE_TRACING_SERVICE_NAME
       - BEE_VERBOSITY=5
       - BEE_WELCOME_MESSAGE
+      - BEE_FULL_NODE=true
     ports:
       - "${API_ADDR:-17339}${BEE_API_ADDR:-:1633}"
       - "${P2P_ADDR:-17349}${BEE_P2P_ADDR:-:1634}"
@@ -1172,6 +1190,7 @@ services:
       - BEE_TRACING_SERVICE_NAME
       - BEE_VERBOSITY=5
       - BEE_WELCOME_MESSAGE
+      - BEE_FULL_NODE=true
     ports:
       - "${API_ADDR:-18331}${BEE_API_ADDR:-:1633}"
       - "${P2P_ADDR:-18341}${BEE_P2P_ADDR:-:1634}"
@@ -1234,6 +1253,7 @@ services:
       - BEE_TRACING_SERVICE_NAME
       - BEE_VERBOSITY=5
       - BEE_WELCOME_MESSAGE
+      - BEE_FULL_NODE=true
     ports:
       - "${API_ADDR:-18332}${BEE_API_ADDR:-:1633}"
       - "${P2P_ADDR:-18342}${BEE_P2P_ADDR:-:1634}"
