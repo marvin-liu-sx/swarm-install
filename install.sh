@@ -352,7 +352,10 @@ setup-send)
   echo "定时任务设置完成"
   ;;
 change-swap)
-  
+
+  endpoint=$2
+
+  echo $endpoint
 
   rm -rf "/root/mnt/bee"
 
@@ -368,7 +371,7 @@ change-swap)
   sleep 2
   mv /root/mnt/bee/env-file2 /root/mnt/bee/.env
   sleep 2
-  sed -i '77,77c BEE_SWAP_ENDPOINT=' $2 /root/mnt/bee/.env
+  sed -i "77,77c BEE_SWAP_ENDPOINT=$endpoint" /root/mnt/bee/.env
   sleep 2
   docker-compose down 
   sleep 2
