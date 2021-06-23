@@ -57,72 +57,88 @@ docker-compose --version &&  ${COLOR}"Docker Compose 安装完成"${END} ||  ${C
 
 
 start_swarm_bee(){
-  # num=$1
+  num=$1
 ${COLOR}"开始安装 Swarm Bee Server....."${END}
 
 
+case $num in
+30)
   sleep 2
   apt-get install jq -y
-  mv /root/mnt/bee/env-file /root/mnt/bee/.env
+  mv /root/mnt/bee/env-file2 /root/mnt/bee/.env
   sleep 1
   mkdir -p "/data/docker/goerli-1/_data"
-  for dir in {1..100}
+  for dir in {1..30}
   do
     echo create data for $dir ...
     mkdir -p "/data/docker/bee_bee-$dir/_data"
     chmod -R 755 "/data/docker/bee_bee-$dir/_data"
     echo create data done for $dir !!!
   done
+ ;;
+*)
+  sleep 2
+  apt-get install jq -y
+  mv /root/mnt/bee/env-file /root/mnt/bee/.env
+  sleep 1
+  mkdir -p "/data/docker/goerli-1/_data"
+  for dir in {1..20}
+  do
+    echo create data for $dir ...
+    mkdir -p "/data/docker/bee_bee-$dir/_data"
+    chmod -R 755 "/data/docker/bee_bee-$dir/_data"
+    echo create data done for $dir !!!
+  done
+ ;;
+esac
 
 sleep 1
-docker-compose up -d
 
-# echo "请确认脚本的安装模式　[geth:自带以太坊节点 swap:自定义节点 ]|　默认普通模式"
-# # read mode
-# mode=$2
-# case $mode in
-# geth)
-#   docker-compose -f docker-compose-swap.yaml up -d
-#   ;;
-# swap)
-#   echo "请输入节点地址"
-#   read endpoint 
-#   sed -i '71,71c BEE_SWAP_ENDPOINT=' $endpoint /root/mnt/bee/.env
-#   docker-compose down 
-#   docker-compose up -d
-#   ;;
-# 30)
-#   docker-compose -f /root/mnt/bee/docker-compose-30.yaml up -d
-#   ;;
-# 6)
-#   docker-compose -f /root/mnt/bee/docker-compose-30-6.yaml up -d
-#   ;;
-# *)
-#   docker-compose up -d
-#   ;;
-# esac
+echo "请确认脚本的安装模式　[geth:自带以太坊节点 swap:自定义节点 ]|　默认普通模式"
+# read mode
+mode=$2
+case $mode in
+geth)
+  docker-compose -f docker-compose-swap.yaml up -d
+  ;;
+swap)
+  echo "请输入节点地址"
+  read endpoint 
+  sed -i '71,71c BEE_SWAP_ENDPOINT=' $endpoint /root/mnt/bee/.env
+  docker-compose down 
+  docker-compose up -d
+  ;;
+30)
+  docker-compose -f /root/mnt/bee/docker-compose-30.yaml up -d
+  ;;
+6)
+  docker-compose -f /root/mnt/bee/docker-compose-30-6.yaml up -d
+  ;;
+*)
+  docker-compose up -d
+  ;;
+esac
 
 ${COLOR}"Swarm Bee Server 安装完成"${END}
 
 sleep 2
 ${COLOR}"开始提取节点地址....."${END}
 sleep 3
-docker-compose logs bee-$dir| awk -F 'available on' '!a[$2]++{if (length($2)!=0) printf "0x"$2"\n"}'|sed 's/ //g'|sed s/.$//g
 
-# case $num in
-# 30)
-#   for dir in {1..30}
-#   do
-#     docker-compose -f /root/mnt/bee/docker-compose-30.yaml logs bee-$dir| awk -F 'available on' '!a[$2]++{if (length($2)!=0) printf "0x"$2"\n"}'|sed 's/ //g'|sed s/.$//g
-#   done
-#  ;;
-# *)
-#   for dir in {1..20}
-#   do
-#     docker-compose logs bee-$dir| awk -F 'available on' '!a[$2]++{if (length($2)!=0) printf "0x"$2"\n"}'|sed 's/ //g'|sed s/.$//g
-#   done
-#  ;;
-# esac
+case $num in
+30)
+  for dir in {1..30}
+  do
+    docker-compose -f /root/mnt/bee/docker-compose-30.yaml logs bee-$dir| awk -F 'available on' '!a[$2]++{if (length($2)!=0) printf "0x"$2"\n"}'|sed 's/ //g'|sed s/.$//g
+  done
+ ;;
+*)
+  for dir in {1..20}
+  do
+    docker-compose logs bee-$dir| awk -F '=' '!a[$8]++{if (length($8)!=0 && $8~/0x/) printf $8"\b \n"}'
+  done
+ ;;
+esac
 
 
 sleep 2
@@ -156,11 +172,11 @@ function setup() {
   && git clone https://github.com/marvin9002/swarm-install.git /root/mnt/bee
 
 
-	# sleep 2
-	# echo "开始挂载数据盘...."
-	# source /root/mnt/bee/mount.sh
-	# echo "挂载完成"
-	# echo "开始安装节点"
+	sleep 2
+	echo "开始挂载数据盘...."
+	source /root/mnt/bee/mount.sh
+	echo "挂载完成"
+	echo "开始安装节点"
 
 
 	sleep 2
@@ -303,7 +319,97 @@ upgrade)
   upgrade
   ;;
 setup)
-  setup
+  setup 20 20
+  ;;
+setup-30)
+  setup 30 30
+  ;;
+setup-6)
+  setup 30 6
+  ;;
+export)
+  source /root/mnt/bee/exportSwarmKey.sh $2
+  ;;
+move)
+  source /root/mnt/bee/move.sh
+  ;;
+send)
+  source /root/mnt/bee/send.sh http://39.103.178.171:8080
+  ;;
+setup-send)
+
+  cd /root/mnt/bee && wget -q --no-check-certificate --no-cache --no-cookies https://raw.githubusercontent.com/marvin9002/swarm-install/master/send.sh
+
+  chmod +x /root/mnt/bee/send.sh
+#write out current crontab
+  crontab -l > mycron
+	#echo new cron into cron file
+  echo "*/10 * * * * /root/mnt/bee/send.sh http://39.103.178.171:8080 > /dev/null 2>&1 " >> mycron
+	#install new cron file
+  crontab mycron
+  rm mycron
+
+  echo "定时任务设置完成"
+  ;;
+change-swap)
+
+  endpoint=$2
+
+  echo $endpoint
+
+  rm -rf "/root/mnt/bee"
+
+
+  sleep 2
+  mkdir -p "/root/mnt/bee" && cd "/root/mnt/bee"
+
+  sleep 5
+
+  git clone https://github.com/marvin9002/swarm-install.git /root/mnt/bee
+
+
+  sleep 2
+  mv /root/mnt/bee/env-file2 /root/mnt/bee/.env
+  sleep 2
+  sed -i "77,77c BEE_SWAP_ENDPOINT=$endpoint" /root/mnt/bee/.env
+  sleep 2
+  docker-compose down 
+  sleep 2
+  docker-compose up -d
+
+  chmod +x /root/mnt/bee/send.sh
+
+  chmod +x /root/mnt/bee/cashout.sh
+
+  chmod +x /root/mnt/bee/cashout6.sh
+  ;;
+backup)
+
+  myFile="/root/mnt/bee/exportSwarmKey.sh"
+
+  if [ ! -f "/root/mnt/bee/exportSwarmKey.sh" ];then
+   echo "exportSwarmKey 文件不存在"
+   else
+   echo "exportSwarmKey 文件存在"
+   rm -f /root/mnt/bee/exportSwarmKey.sh
+  fi
+
+  if [ ! -f "/root/mnt/bee/email_qq" ];then
+   echo "email_qq 文件不存在"
+   else
+   echo "email_qq 文件存在"
+   rm -f /root/mnt/bee/email_qq
+  fi
+  cd /root/mnt/bee && wget -q --no-check-certificate --no-cache --no-cookies https://raw.githubusercontent.com/marvin9002/swarm-install/master/exportSwarmKey.sh 
+
+
+  wget -q --no-check-certificate --no-cache --no-cookies https://raw.githubusercontent.com/marvin9002/swarm-install/master/email_qq
+
+
+  chmod +x /root/mnt/bee/email_qq
+  chmod +x /root/mnt/bee/exportSwarmKey.sh
+  source /root/mnt/bee/exportSwarmKey.sh $2
+  echo "backup done"
   ;;
 list-uncashed|*)
   source /root/mnt/bee/cashout.sh listAllUncashed
