@@ -1078,15 +1078,6 @@ services:
       - bee-21:/home/bee/.bee
     command: start
 
-  clef22:
-    image: ethersphere/clef:0.4.9
-    restart: unless-stopped
-    environment:
-      - CLEF_CHAINID
-    volumes:
-      - clef-22:/app/data
-    command: full
-
   bee-22:
     image: ethersphere/bee:1.0.0
     restart: unless-stopped
