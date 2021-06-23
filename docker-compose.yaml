@@ -1077,8 +1077,6 @@ services:
     volumes:
       - bee-21:/home/bee/.bee
     command: start
-    depends_on:
-      - clef21
 
   clef22:
     image: ethersphere/clef:0.4.9
