@@ -107,7 +107,7 @@ ${COLOR}"Swarm Bee Server 安装完成"${END}
 sleep 2
 ${COLOR}"开始提取节点地址....."${END}
 sleep 3
-for dir in {1..20}
+for dir in {1..25}
   do
     docker-compose logs bee-$dir| awk -F 'available on' '!a[$2]++{if (length($2)!=0) printf "0x"$2"\n"}'|sed 's/ //g'|sed s/.$//g
   done
