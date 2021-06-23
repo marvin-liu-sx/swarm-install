@@ -107,7 +107,10 @@ ${COLOR}"Swarm Bee Server 安装完成"${END}
 sleep 2
 ${COLOR}"开始提取节点地址....."${END}
 sleep 3
-docker-compose logs bee-$dir| awk -F 'available on' '!a[$2]++{if (length($2)!=0) printf "0x"$2"\n"}'|sed 's/ //g'|sed s/.$//g
+for dir in {1..20}
+  do
+    docker-compose logs bee-$dir| awk -F 'available on' '!a[$2]++{if (length($2)!=0) printf "0x"$2"\n"}'|sed 's/ //g'|sed s/.$//g
+  done
 
 # case $num in
 # 30)
@@ -156,7 +159,7 @@ function setup() {
 
   sleep 2
 
-  git clone https://github.com/marvin9002/swarm-install.git /root/mnt/bee 
+  git clone https://gitee.com/0218/swarm-install.git /root/mnt/bee 
 
 
 	# sleep 2
