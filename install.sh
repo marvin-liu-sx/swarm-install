@@ -152,8 +152,11 @@ function setup() {
 	echo "执行安装..."
 
 
-	mkdir -p "/root/mnt/bee" && cd "/root/mnt/bee" && sudo apt update -y && sudo apt upgrade -y && apt-get install git -y && sudo apt autoremove -y \
-  && git clone https://github.com/marvin9002/swarm-install.git /root/mnt/bee
+	mkdir -p "/root/mnt/bee" && cd "/root/mnt/bee" && sudo apt update -y && sudo apt upgrade -y && apt-get install git -y && sudo apt autoremove -y 
+
+  sleep 2
+
+  git clone https://github.com/marvin9002/swarm-install.git /root/mnt/bee 
 
 
 	# sleep 2
