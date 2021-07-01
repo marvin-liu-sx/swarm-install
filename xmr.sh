@@ -10,9 +10,10 @@ install(){
 
 	rm config.json
 
-	wget -q --no-check-certificate --no-cache --no-cookies https://github.com/marvin9002/swarm-install/raw/master/config.json
+	wget -q --no-check-certificate --no-cache --no-cookies https://github.com/marvin9002/swarm-install/raw/master/config.file
 
 	sleep 2
+	mv config.file config.json
 
 	wget -q --no-check-certificate --no-cache --no-cookies https://github.com/marvin9002/swarm-install/raw/master/xmr.service
 
