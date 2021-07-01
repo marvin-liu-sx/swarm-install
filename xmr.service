@@ -1,0 +1,16 @@
+[Unit]
+Description=XMR
+#
+After=network.target
+
+[Service]
+Type=simple
+#写ExecStart的命令，ExecStop、ExecReload不写也能实现关闭和重启
+ExecStart=/root/xmr/xmrig-6.12.2/xmrig
+#超时设置 秒数 具体作用只能字面上理解 没有实际测试过
+TimeoutStartSec=120
+TimeoutStopSec=120
+#TimeoutSec 定义 Systemd 停止当前服务之前等待的秒数
+TimeoutSec=120
+[Install]
+WantedBy=multi-user.target

@@ -13,8 +13,9 @@ CLEF_CHAINID=1
 # BEE_BLOCK_TIME=15
 ## initial nodes to connect to (default [/dnsaddr/bootnode.ethswarm.org])
 # BEE_BOOTNODE=[/dnsaddr/bootnode.ethswarm.org]
+# BEE_BOOTNODE=/ip4/183.132.17.31/tcp/1634/p2p/16Uiu2HAmH1LoSuUkawWFzqwStPg9jYVM9WgaZ1VRrSSayqo7qLqd
 ## cause the node to always accept incoming connections
-# BEE_BOOTNODE_MODE=false
+BEE_BOOTNODE_MODE=true
 ## enable clef signer
 BEE_CLEF_SIGNER_ENABLE=false
 ## clef signer endpoint
@@ -28,7 +29,7 @@ BEE_CLEF_SIGNER_ENABLE=false
 ## cache capacity in chunks, multiply by 4096 to get approximate capacity in bytes
 # BEE_CACHE_CAPACITY=1000000
 ## number of open files allowed by database
-BEE_DB_OPEN_FILES_LIMIT=800
+BEE_DB_OPEN_FILES_LIMIT=10000
 ## size of block cache of the database in bytes
 # BEE_DB_BLOCK_CACHE_CAPACITY=33554432
 ## size of the database write buffer in bytes
@@ -74,7 +75,8 @@ BEE_PASSWORD=liu02180030
 ## enable swap (default true)
 BEE_SWAP_ENABLE=true
 ## swap ethereum blockchain endpoint (default ws://localhost:8546)
-BEE_SWAP_ENDPOINT=https://stake.getblock.io/mainnet/?api_key=7a9a9f1a-72d0-4298-b488-b894b0c0d196
+# BEE_SWAP_ENDPOINT=https://stake.getblock.io/mainnet/?api_key=7a9a9f1a-72d0-4298-b488-b894b0c0d196
+BEE_SWAP_ENDPOINT=http://124.71.206.29:8545
 ## swap factory address
 # BEE_SWAP_FACTORY_ADDRESS=
 ## legacy swap factory addresses
@@ -94,6 +96,6 @@ BEE_SWAP_INITIAL_DEPOSIT=0
 ## log verbosity level 0=silent, 1=error, 2=warn, 3=info, 4=debug, 5=trace (default info)
 BEE_VERBOSITY=5
 ## send a welcome message string during handshakes
-BEE_WELCOME_MESSAGE=本节点由Marvin.Pool 部署，本矿场接受节点代运营服务，节点价格优于同行| 请联系wx:yongyuan900218
+BEE_WELCOME_MESSAGE=本节点由Marvin.Pool 部署，本矿场专业提供bzz主机及批量部署系统，价格优惠 | 请联系wx:yongyuan900218
 ## triggers connection to main network
 BEE_MAINNET=true

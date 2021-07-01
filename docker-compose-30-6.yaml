@@ -5958,7 +5958,7 @@ services:
       - BEE_BOOTNODE
       - BEE_BOOTNODE_MODE
       - BEE_CLEF_SIGNER_ENABLE=true
-      - BEE_CLEF_SIGNER_ENDPOINT=http://clef97:8550
+      - BEE_CLEF_9SIGNER_ENDPOINT=http://clef97:8550
       - BEE_CONFIG
       - BEE_CORS_ALLOWED_ORIGINS
       - BEE_DATA_DIR
@@ -6020,7 +6020,7 @@ services:
       - BEE_BOOTNODE
       - BEE_BOOTNODE_MODE
       - BEE_CLEF_SIGNER_ENABLE=true
-      - BEE_CLEF_SIGNER_ENDPOINT=http://clef98:8550
+      - BEE_CLEF_9SIGNER_ENDPOINT=http://clef98:8550
       - BEE_CONFIG
       - BEE_CORS_ALLOWED_ORIGINS
       - BEE_DATA_DIR
@@ -6082,7 +6082,7 @@ services:
       - BEE_BOOTNODE
       - BEE_BOOTNODE_MODE
       - BEE_CLEF_SIGNER_ENABLE=true
-      - BEE_CLEF_SIGNER_ENDPOINT=http://clef99:8550
+      - BEE_CLEF_S9IGNER_ENDPOINT=http://clef99:8550
       - BEE_CONFIG
       - BEE_CORS_ALLOWED_ORIGINS
       - BEE_DATA_DIR
