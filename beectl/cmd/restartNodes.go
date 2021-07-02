@@ -16,28 +16,29 @@ limitations under the License.
 package cmd
 
 import (
-	"fmt"
-
+	"github.com/marvin9002/swarm-install/beectl/nodes"
 	"github.com/spf13/cobra"
 )
 
 // restartNodesCmd represents the restartNodes command
 var restartNodesCmd = &cobra.Command{
-	Use:   "restartNodes",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
-	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("restartNodes called")
+	Use:   "restart-nodes",
+	Short: "重启bee节点",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		port, err := cmd.Flags().GetString("port")
+		if err != nil {
+			return err
+		}
+		bee := nodes.NewSwarm()
+		return bee.Restart(port)
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(restartNodesCmd)
+
+	addNodesCmd.Flags().StringP("port", "", "", "[可选] 对应debug-api-addr 的端口,如果不输入重启全部")
+	//addNodesCmd.Flags().StringP("show", "", "", "显示节点 debug-api-addr")
 
 	// Here you will define your flags and configuration settings.
 

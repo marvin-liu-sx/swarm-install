@@ -23,14 +23,8 @@ import (
 
 // addConfigCmd represents the addConfig command
 var addConfigCmd = &cobra.Command{
-	Use:   "addConfig",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Use:   "add-config",
+	Short: "添加已经存在的bee节点配置到此监控",
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("addConfig called")
 	},

@@ -24,13 +24,7 @@ import (
 // showipCmd represents the showip command
 var showipCmd = &cobra.Command{
 	Use:   "showip",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "显示在管理中心绑定设备时应填的IP地址",
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("showip called")
 	},
