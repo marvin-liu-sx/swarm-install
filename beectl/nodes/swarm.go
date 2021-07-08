@@ -7,9 +7,10 @@ import (
 )
 
 type config struct {
-	Name string
-	Addr string
-	ID   string
+	Name string `json:"name"`
+	Addr string `json:"addr"`
+	ID   string `json:"id"`
+	Cfg  string `json:"cfg"`
 }
 
 type address struct {
@@ -27,6 +28,7 @@ type BeeCfg struct {
 	Pwd          string
 	EndPoint     string
 	Dir          string
+	BeeCfgPath   string // 节点配置文件路径
 }
 
 type Swarm struct {
@@ -59,37 +61,37 @@ func NewSwarm() *Swarm {
 		return nil
 	}
 	return &Swarm{
-		Logger:      log.New(os.Stdout, "[Swarm]: ", log.Ldate|log.Ltime),
+		Logger:      log.New(os.Stdout, "[BeeCtrl]: ", log.Ldate|log.Ltime),
 		BeeCfgPath:  "/etc/bee",
-		InstallPath: path.Dir(getwd),
-		CtrlCfg:     path.Join(path.Dir(getwd), "/beectrl.cfg"),
+		InstallPath: getwd,
+		CtrlCfg:     path.Join(getwd, "/beectrl.cfg"),
 		ResultName:  "result.log",
 		Config:      config{},
 	}
 }
 
 func (h *Swarm) Printf(format string, v ...interface{}) {
-	f, err := os.OpenFile(path.Join(path.Dir(h.InstallPath)+h.ResultName), os.O_APPEND|os.O_CREATE, 0666)
+	f, err := os.OpenFile(path.Join(h.InstallPath+"/"+h.ResultName), os.O_APPEND|os.O_CREATE, 0666)
 	if err != nil {
 		log.Println("create file: ", err)
 		return
 	}
 
 	defer f.Close()
-	log.SetOutput(f)
-	log.Printf(format, v)
+	lg := log.New(f, "[BeeCtrl]: ", log.Ldate|log.Ltime)
+	lg.Printf(format, v)
 	h.Logger.Printf(format, v)
 }
 
 func (h *Swarm) Println(v ...interface{}) {
-	f, err := os.OpenFile(path.Join(path.Dir(h.InstallPath)+h.ResultName), os.O_APPEND|os.O_CREATE, 0666)
+	f, err := os.OpenFile(path.Join(h.InstallPath+"/"+h.ResultName), os.O_APPEND|os.O_CREATE, 0666)
 	if err != nil {
 		log.Println("create file: ", err)
 		return
 	}
 
 	defer f.Close()
-	log.SetOutput(f)
-	log.Println(v)
+	lg := log.New(f, "[BeeCtrl]: ", log.Ldate|log.Ltime)
+	lg.Println(v)
 	h.Logger.Println(v)
 }

@@ -42,6 +42,9 @@ func (h *Swarm) GetAddrs() error {
 	if err != nil {
 		return err
 	}
+	if len(cfg) <= 0 {
+		return nil
+	}
 	var addressesArr []string
 	for _, conf := range cfg {
 		addresses, err := h.getAddr(conf.ID)
@@ -52,7 +55,7 @@ func (h *Swarm) GetAddrs() error {
 		addressesArr = append(addressesArr, addresses)
 	}
 	h.Println("所有节点地址信息已经存入当前目录的 addresses.log 中，方便您后期查看")
-	logs, err := os.OpenFile(path.Join(path.Dir(h.InstallPath), "/addresses.log"), os.O_APPEND|os.O_CREATE, 0666)
+	logs, err := os.OpenFile(path.Join(h.InstallPath, "/addresses.log"), os.O_APPEND|os.O_CREATE, 0666)
 	if err != nil {
 		log.Println("create file: ", err)
 		return err

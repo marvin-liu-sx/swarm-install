@@ -37,7 +37,7 @@ var restartNodesCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(restartNodesCmd)
 
-	addNodesCmd.Flags().StringP("port", "", "", "[可选] 对应debug-api-addr 的端口,如果不输入重启全部")
+	restartNodesCmd.Flags().StringP("port", "", "", "[可选] 对应debug-api-addr 的端口,如果不输入重启全部")
 	//addNodesCmd.Flags().StringP("show", "", "", "显示节点 debug-api-addr")
 
 	// Here you will define your flags and configuration settings.

@@ -5,6 +5,8 @@ import (
 	"os"
 	"path"
 
+	"github.com/spf13/viper"
+
 	"github.com/marvin9002/swarm-install/beectl/utils"
 )
 
@@ -29,14 +31,14 @@ func (h *Swarm) ExportAllSwarmKey() error {
 		return err
 	}
 	if len(cfg) <= 0 {
-
+		return nil
 	}
 	for _, cf := range cfg {
 		dest, err := h.backUp(cf.ID)
 		if err != nil {
 			return err
 		}
-		h.Printf("已经打包备份bee%s节点钱包相关信息在:%s \n", cf.ID, dest)
+		h.Println(fmt.Sprintf("已经打包备份bee%s节点钱包相关信息在:%s \n", cf.ID, dest))
 	}
 
 	h.Println("!!! 请注意备份钱包相关信息目录文件, 请将备份后的文件保存到其他电脑上以防止本机硬盘损坏以后钱包丢失!!!")
@@ -45,21 +47,32 @@ func (h *Swarm) ExportAllSwarmKey() error {
 }
 
 func (h *Swarm) backUp(nodeId string) (string, error) {
-	f1, err := os.Open(path.Join(h.Dir, fmt.Sprintf("/bee%s", nodeId)))
-	if err != nil {
-		h.Println(err)
-		return "", err
-	}
-	defer f1.Close()
+	var files = []*os.File{}
 	f2, err := os.Open(path.Join(h.BeeCfgPath, fmt.Sprintf("/bee%s.yaml", nodeId)))
 	if err != nil {
 		h.Println(err)
-		return "", err
+	} else {
+		files = append(files, f2)
 	}
 	defer f2.Close()
 
-	var files = []*os.File{f1, f2}
-	dest := path.Join(path.Dir(h.InstallPath), fmt.Sprintf("/bkup_bee%s_keys.zip", nodeId))
+	config := viper.New()
+	config.SetConfigType("yaml")
+	config.SetConfigFile(path.Join(h.BeeCfgPath, fmt.Sprintf("/bee%s.yaml", nodeId)))
+	//尝试进行配置读取
+	if err := config.ReadInConfig(); err != nil {
+		panic(err)
+	}
+
+	f1, err := os.Open(config.Get("data-dir").(string))
+	if err != nil {
+		h.Println(err)
+	} else {
+		files = append(files, f1)
+	}
+	defer f1.Close()
+
+	dest := path.Join(h.InstallPath, fmt.Sprintf("/bkup_bee%s_keys.zip", nodeId))
 	err = utils.Compress(files, dest)
 	if err != nil {
 		h.Println(err)

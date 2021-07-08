@@ -17,21 +17,86 @@ package cmd
 
 import (
 	"fmt"
+	"os"
+	"path/filepath"
+	"strings"
 
+	"github.com/marvin9002/swarm-install/beectl/nodes"
+	"github.com/marvin9002/swarm-install/beectl/utils"
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 // addConfigCmd represents the addConfig command
 var addConfigCmd = &cobra.Command{
 	Use:   "add-config",
 	Short: "添加已经存在的bee节点配置到此监控",
-	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("addConfig called")
+	RunE: func(cmd *cobra.Command, args []string) error {
+		cfg, err := cmd.Flags().GetString("bee-config")
+		if err != nil {
+			return err
+		}
+		bee := nodes.NewSwarm()
+		bee = bee
+		if utils.IsFile(cfg) {
+			config := viper.New()
+			config.SetConfigType("yaml")
+			config.SetConfigFile(cfg)
+			//尝试进行配置读取
+			if err := config.ReadInConfig(); err != nil {
+				panic(err)
+			}
+
+			//打印文件读取出来的内容:
+			fmt.Println(config.Get("debug-api-addr"))
+			fmt.Println(config.Get("config"))
+			fmt.Println(config.Get("data-dir"))
+			err := bee.UpdateCfg(fmt.Sprintf("bee%s", strings.Split(config.Get("debug-api-addr").(string), ":")[1]), strings.Split(config.Get("debug-api-addr").(string), ":")[1])
+			if err != nil {
+				return err
+			}
+		} else {
+			var files []string
+
+			err := filepath.Walk(cfg, func(path string, f os.FileInfo, err error) error {
+				if f == nil {
+					return err
+				}
+				if f.IsDir() {
+					return nil
+				}
+				files = append(files, path)
+				return nil
+			})
+			if err != nil {
+				fmt.Printf("filepath.Walk() returned %v\n", err)
+			}
+			for _, file := range files {
+				config := viper.New()
+				config.SetConfigType("yaml")
+				config.SetConfigFile(file)
+				//尝试进行配置读取
+				if err := config.ReadInConfig(); err != nil {
+					panic(err)
+				}
+
+				//打印文件读取出来的内容:
+				fmt.Println(config.Get("debug-api-addr"))
+				fmt.Println(config.Get("config"))
+				fmt.Println(config.Get("data-dir"))
+				err := bee.UpdateCfg(fmt.Sprintf("bee%s", strings.Split(config.Get("debug-api-addr").(string), ":")[1]), strings.Split(config.Get("debug-api-addr").(string), ":")[1])
+				if err != nil {
+					return err
+				}
+			}
+		}
+		return nil
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(addConfigCmd)
+	addConfigCmd.Flags().StringP("bee-config", "", "", "导入已经存在的bee配置文件|目录 如: /etc/bee 或者 /etc/bee/bee.yaml , 如果是目录将自动加载目录下的所有yaml配置.")
 
 	// Here you will define your flags and configuration settings.
 

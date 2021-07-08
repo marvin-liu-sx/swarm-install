@@ -17,6 +17,9 @@ package cmd
 
 import (
 	"fmt"
+	"net"
+	"os/exec"
+	"strings"
 
 	"github.com/spf13/cobra"
 )
@@ -26,7 +29,18 @@ var showipCmd = &cobra.Command{
 	Use:   "showip",
 	Short: "显示在管理中心绑定设备时应填的IP地址",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("showip called")
+		curl := exec.Command("curl", "-s", "api.infoip.io/ip") // 修改了此行
+		out, err := curl.Output()
+		if err != nil {
+			fmt.Println("erorr", err)
+			return
+		}
+		conn, _ := net.Dial("udp", "8.8.8.8:80")
+		defer conn.Close()
+		localAddr := conn.LocalAddr().String()
+		idx := strings.LastIndex(localAddr, ":")
+
+		fmt.Println(string(out) + "/" + localAddr[0:idx])
 	},
 }
 

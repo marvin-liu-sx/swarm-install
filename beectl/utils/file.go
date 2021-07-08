@@ -4,6 +4,7 @@ import (
 	"archive/zip"
 	"io"
 	"os"
+	"path/filepath"
 	"strings"
 )
 
@@ -118,5 +119,64 @@ func subString(str string, start, end int) string {
 
 func Exist(filename string) bool {
 	_, err := os.Stat(filename)
+	return err == nil || os.IsExist(err)
+}
+
+// 判断所给路径文件/文件夹是否存在
+func Exists(path string) bool {
+	_, err := os.Stat(path) //os.Stat获取文件信息
+	if err != nil {
+		if os.IsExist(err) {
+			return true
+		}
+		return false
+	}
+	return true
+}
+
+// 判断所给路径是否为文件夹
+func IsDir(path string) bool {
+	s, err := os.Stat(path)
+	if err != nil {
+		return false
+	}
+	return s.IsDir()
+}
+
+// 判断所给路径是否为文件
+func IsFile(path string) bool {
+	return !IsDir(path)
+}
+
+//getFileSize get file size by path(B)
+func DirSizeB(path string) (int64, error) {
+	var size int64
+	err := filepath.Walk(path, func(_ string, info os.FileInfo, err error) error {
+		if err != nil {
+			return err
+		}
+		if !info.IsDir() {
+			size += info.Size()
+		}
+		return err
+	})
+	return size, err
+}
+
+//getFileSize get file size by path(B)
+func getFileSize(path string) int64 {
+	if !exists(path) {
+		return 0
+	}
+	fileInfo, err := os.Stat(path)
+	if err != nil {
+		return 0
+	}
+	return fileInfo.Size()
+}
+
+//exists Whether the path exists
+func exists(path string) bool {
+	_, err := os.Stat(path)
 	return err == nil || os.IsExist(err)
 }

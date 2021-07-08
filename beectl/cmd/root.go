@@ -29,7 +29,7 @@ var cfgFile string
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:   "beectl",
+	Use:   "beectrl",
 	Short: "Bee Nodes 管理工具",
 }
 
@@ -46,7 +46,7 @@ func init() {
 	// Cobra supports persistent flags, which, if defined here,
 	// will be global for your application.
 
-	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.beectl.yaml)")
+	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.beectrl.yaml)")
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
@@ -65,7 +65,7 @@ func initConfig() {
 
 		// Search config in home directory with name ".beectl" (without extension).
 		viper.AddConfigPath(home)
-		viper.SetConfigName(".beectl")
+		viper.SetConfigName(".beectrl")
 	}
 
 	viper.AutomaticEnv() // read in environment variables that match

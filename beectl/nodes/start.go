@@ -17,7 +17,7 @@ func (h *Swarm) Start() error {
 	t := template.New("cfg")
 	t = template.Must(t.Parse(
 		`api-addr: 127.0.0.1:{{.ApiAddr}}
-config: /etc/bee/bee{{.DEBUGApiAddr}}.yaml
+config: {{.BeeCfgPath}}/bee{{.DEBUGApiAddr}}.yaml
 data-dir: {{.Dir}}/bee{{.DEBUGApiAddr}}
 debug-api-addr: 127.0.0.1:{{.DEBUGApiAddr}}
 debug-api-enable: true
@@ -51,6 +51,7 @@ welcome-message: "本节点由Marvin.Pool 部署，本矿场专业提供bzz主�
 			Pwd:          h.Pwd,
 			EndPoint:     h.EndPoint,
 			Dir:          h.Dir,
+			BeeCfgPath:   h.BeeCfgPath,
 		}
 		err := os.MkdirAll(h.BeeCfgPath, os.ModePerm)
 		if err != nil {
